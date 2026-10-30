@@ -61,5 +61,21 @@ def inyectar_sesion():
 def inicio():
     return redirect(url_for('auth.login'))
 
+@app.route("/dbtest")
+def dbtest():
+    import psycopg2
+    url = os.environ.get("DATABASE_URL")
+    if not url:
+        return "RESULTADO: DATABASE_URL NO llega a esta app"
+    try:
+        c = psycopg2.connect(url)
+        cur = c.cursor()
+        cur.execute("select current_database()")
+        r = cur.fetchone()
+        c.close()
+        return f"RESULTADO: conexion OK a {r[0]}"
+    except Exception as e:
+        return f"RESULTADO: ERROR -> {e}"
+
 if __name__ == '__main__':
     app.run(debug=True)
