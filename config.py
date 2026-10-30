@@ -2,7 +2,8 @@ import os
 
 import psycopg2
 
-DATABASE_URL =os.environ["DATABASE_URL"]
+DATABASE_URL = os.environ.get("DATABASE_URL_UNPOOLED") or os.environ.get("DATABASE_URL")
+print("DATABASE_URL presente:", bool(os.environ.get("DATABASE_URL")))   # <-- AQUÍ
 
 def conectar():
     try:
