@@ -1,0 +1,190 @@
+:root {
+  --menu-vino: rgb(73, 41, 34);
+  --menu-rojo: #A52727;
+  --menu-rosado: rgb(255, 213, 206);
+  --menu-blanco: #ffffff;
+  --menu-texto: #1c1c20;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Nunito', Arial, sans-serif;
+  background-color: var(--menu-rosado);
+  color: var(--menu-texto);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contenedor principal que forma la tarjeta blanca centrada */
+.main-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+.card-container-main {
+  max-width: 900px;
+  width: 100%;
+  background-color: var(--menu-blanco);
+  border-radius: 28px;
+  padding: 50px 40px;
+  box-shadow: 0 10px 30px rgba(73, 41, 34, 0.12);
+  box-sizing: border-box;
+}
+
+.manual-title-section {
+  text-align: left; /* Alineado a la izquierda como en la foto de referencia */
+  margin-bottom: 30px;
+}
+
+.manual-tag-top {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--menu-rojo);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.manual-title-section h1 {
+  font-size: 2.4rem;
+  color: var(--menu-vino);
+  margin: 0 0 10px 0;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.linea-decorativa-vino {
+  width: 60px;
+  height: 4px;
+  background-color: var(--menu-rojo);
+  margin: 12px 0;
+  border-radius: 2px;
+}
+
+.manual-subtitle {
+  font-size: 0.85rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+/* Barra de acciones y botón de descarga */
+.download-action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 35px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(73, 41, 34, 0.1);
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.badge-info-box {
+  background: var(--menu-rosado);
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: var(--menu-vino);
+  font-weight: 700;
+}
+
+.btn-descargar-pdf {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--menu-vino);
+  color: var(--menu-blanco);
+  border-radius: 20px;
+  padding: 12px 24px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(73, 41, 34, 0.2);
+}
+
+.btn-descargar-pdf:hover {
+  background-color: var(--menu-rojo);
+  transform: translateY(-2px);
+}
+
+/* Lista de Normas */
+.manual-rules-container {
+  padding-top: 5px;
+}
+
+.rules-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rule-item {
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(73, 41, 34, 0.08);
+}
+
+.rule-item:last-child {
+  border-bottom: none;
+}
+
+.rule-header-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.rule-number-tag {
+  background-color: var(--menu-rosado);
+  color: var(--menu-vino);
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.rule-title-text {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--menu-vino);
+}
+
+.rule-description-text {
+  font-size: 0.95rem;
+  color: #4a4a4a;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.rule-sublist {
+  margin-top: 8px;
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.rule-sublist li {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+/* Pie de página */
+.manual-footer {
+  background-color: var(--menu-vino);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin-top: auto;
+  font-size: 0.85rem;
+}

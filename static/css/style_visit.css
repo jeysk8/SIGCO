@@ -1,0 +1,260 @@
+:root {
+  --visit-vino: rgb(73, 41, 34);      /* #492922 */
+  --visit-rojo: #A52727;
+  --visit-rosa: rgb(255, 213, 206);
+  --visit-blanco: #ffffff;
+  --visit-texto: #1c1c20;
+  --visit-naranja: rgb(250, 154, 81);
+}
+
+/* ---------- Estructura de la página ---------- */
+
+.visit-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ---------- Header ---------- */
+
+.visit-navbar {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.visit-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: inherit;
+}
+
+.visit-logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border: 1px solid var(--visit-vino);
+  border-radius: 4px;
+  background: var(--visit-blanco);
+}
+
+.visit-logo-name {
+  font-size: 11px;
+  color: var(--visit-vino);
+}
+
+.visit-tabs {
+  display: flex;
+  gap: 1rem;
+}
+
+.visit-tab {
+  font-size: 13px;
+  color: var(--visit-texto);
+  white-space: nowrap;
+}
+
+.visit-tab:hover {
+  color: var(--visit-vino);
+}
+
+.visit-tab-active {
+  font-weight: 800;
+}
+
+.header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-icon {
+  width: 26px;
+  height: 26px;
+  color: var(--visit-vino);
+}
+
+/* Botón "Iniciar Sesión" (ocupa el lugar del antiguo @usuario) */
+.visit-login-btn {
+  padding: 6px 16px;
+  border: 1px solid var(--visit-vino);
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--visit-vino);
+  background: var(--visit-blanco);
+  white-space: nowrap;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.visit-login-btn:hover {
+  background: var(--visit-vino);
+  color: var(--visit-blanco);
+  transform: scale(1.05);
+}
+
+/* ---------- Contenido: formulario centrado ---------- */
+
+.layout-visitas {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem 1rem;
+}
+
+.contenedor-formulario {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.visit-bienvenida {
+  color: var(--visit-vino);
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.caja-inputs {
+  width: 100%;
+  border: 2px solid var(--visit-vino);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  background-color: var(--visit-blanco);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.caja-inputs input,
+.caja-inputs select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid rgba(73, 41, 34, 0.3);
+  border-radius: 20px;
+  background-color: var(--visit-blanco);
+  font-family: "Nunito", sans-serif;
+  font-size: 0.95rem;
+  color: var(--visit-texto);
+  outline: none;
+  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.caja-inputs input:focus,
+.caja-inputs select:focus {
+  border-color: var(--visit-naranja);
+  box-shadow: 0 0 0 3px rgba(250, 154, 81, 0.3);
+}
+
+#placa {
+  text-transform: uppercase;
+}
+
+/* ---------- Botón Ingresar ---------- */
+
+.btn-ingresar {
+  background-color: var(--visit-vino);
+  color: var(--visit-blanco);
+  font-family: "Nunito", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.75rem 2.5rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-ingresar:hover {
+  background: linear-gradient(135deg, #442623, var(--visit-rojo));
+  transform: scale(1.05);
+}
+
+.btn-ingresar:active {
+  transform: scale(0.95);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 768px) {
+  .visit-navbar {
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .header-right {
+    margin-left: 0;
+  }
+}
+
+/* ---------- Aviso flotante (mensajes flash) ---------- */
+
+.aviso {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  min-width: 260px;
+  max-width: 90vw;
+  background-color: var(--visit-blanco);
+  border: 2px solid var(--visit-vino);
+  border-radius: 16px;
+  padding: 1rem 2.5rem 1rem 1.25rem;
+  box-shadow: 0 8px 20px rgba(73, 41, 34, 0.2);
+  animation: aviso-entrada 0.3s ease;
+}
+
+.aviso p {
+  color: var(--visit-vino);
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.aviso-cerrar {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--visit-vino);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.aviso-cerrar:hover {
+  color: var(--visit-rojo);
+}
+
+@keyframes aviso-entrada {
+  from { opacity: 0; transform: translate(-50%, -10px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* "@nombre" cuando hay sesión iniciada */
+.visit-usuario {
+  padding: 6px 14px;
+  border: 1px solid var(--visit-vino);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: var(--visit-vino);
+  background: var(--visit-blanco);
+  white-space: nowrap;
+}

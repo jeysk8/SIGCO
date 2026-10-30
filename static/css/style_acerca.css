@@ -1,0 +1,204 @@
+:root {
+  --acerca-vino: rgb(73, 41, 34);      /* #492922 */
+  --acerca-rojo: #A52727;
+  --acerca-rosado: rgb(255, 213, 206);
+  --acerca-blanco: #ffffff;
+  --acerca-texto: #1c1c20;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Nunito', Arial, sans-serif;
+  background-color: var(--acerca-rosado) !important;
+  color: var(--acerca-texto);
+  min-height: 100vh;
+}
+
+/* ---------- ENCABEZADO (mismo diseño que Visitas, Servicios, etc.) ---------- */
+/* La base compartida (.header-menu, .navbar-menu, .icon-btn, .notif-dot,
+   .settings-wrapper, .settings-dropdown) viene de style_menu.css, que debe
+   cargarse ANTES que este archivo. */
+
+.acerca-navbar {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.acerca-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: inherit;
+}
+
+.acerca-logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border: 1px solid var(--acerca-vino);
+  border-radius: 4px;
+  background: var(--acerca-blanco);
+}
+
+.acerca-logo-name {
+  font-size: 11px;
+  color: var(--acerca-vino);
+}
+
+.acerca-tabs {
+  display: flex;
+  gap: 1rem;
+}
+
+.acerca-tab {
+  font-size: 13px;
+  color: var(--acerca-texto);
+  white-space: nowrap;
+}
+
+.acerca-tab:hover {
+  color: var(--acerca-vino);
+}
+
+.acerca-tab-active {
+  font-weight: 800;
+}
+
+.acerca-header .header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.acerca-header .profile-icon {
+  width: 26px;
+  height: 26px;
+  color: var(--acerca-vino);
+}
+
+.acerca-login-btn {
+  padding: 6px 16px;
+  border: 1px solid var(--acerca-vino);
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--acerca-vino);
+  background: var(--acerca-blanco);
+  white-space: nowrap;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.acerca-login-btn:hover {
+  background: var(--acerca-vino);
+  color: var(--acerca-blanco);
+  transform: scale(1.05);
+}
+
+/* "@nombre" cuando hay sesión iniciada */
+.acerca-usuario {
+  padding: 6px 14px;
+  border: 1px solid var(--acerca-vino);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: var(--acerca-vino);
+  background: var(--acerca-blanco);
+  white-space: nowrap;
+}
+
+/* ---------- TARJETA CONTENEDORA BLANCA ---------- */
+.acerca-container {
+  max-width: 1050px;
+  width: 90%;
+  margin: 35px auto 50px auto;
+}
+
+.acerca-card {
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(73, 41, 34, 0.12);
+  border: 1px solid rgba(73, 41, 34, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.acerca-texto {
+  flex: 1.2;
+}
+
+.acerca-eyebrow {
+  color: var(--acerca-rojo);
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.acerca-texto h1 {
+  font-size: 2.2rem;
+  color: var(--acerca-vino) !important;
+  margin-bottom: 1.2rem;
+  font-weight: 800;
+}
+
+.acerca-descripcion h2 {
+  color: var(--acerca-vino) !important;
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-top: 1.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.acerca-descripcion p {
+  color: var(--acerca-texto) !important;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+  font-weight: 400;
+}
+
+.acerca-descripcion strong {
+  color: var(--acerca-vino) !important;
+  font-weight: 700;
+}
+
+.acerca-imagen {
+  flex: 0.9;
+  display: flex;
+  justify-content: center;
+}
+
+.acerca-imagen img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 12px 25px rgba(73, 41, 34, 0.18);
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .acerca-navbar {
+    justify-content: center;
+    gap: 1rem;
+  }
+  .acerca-header .header-right {
+    margin-left: 0;
+  }
+  .acerca-card {
+    flex-direction: column-reverse;
+    padding: 25px 20px;
+    text-align: center;
+  }
+}

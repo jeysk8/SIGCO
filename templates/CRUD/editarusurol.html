@@ -1,0 +1,38 @@
+<div class="modal fade modal-vino" id="modalActualizarusur{{ fila[0] }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" method="POST" action="{{ url_for('usuario_rol.consultar_usuario_rol') }}">
+            <input type="hidden" name="accion" value="actualizar">
+            <input type="hidden" name="idur" value="{{ fila[0] }}">
+            <div class="modal-header">
+                <h5 class="modal-title">Actualizar rol {{ fila[0] }}</h5>
+            </div>
+            <div class="modal-body">
+
+                <label class="mb-1">Usuario</label>
+                <select class="form-control mb-2" name="idu" required>
+                    {% for u in usuarios %}
+                        <option value="{{ u[0] }}" {% if u[0] == fila[3] %}selected{% endif %}>{{ u[1] }}</option>
+                    {% endfor %}
+                </select>
+
+                <label class="mb-1">Rol</label>
+                <select class="form-control mb-2" name="idrol1" required>
+                    {% for r in roles %}
+                        <option value="{{ r[0] }}" {% if r[0] == fila[4] %}selected{% endif %}>{{ r[1] }}</option>
+                    {% endfor %}
+                </select>
+
+                <label class="mb-1">Estado</label>
+                <select class="form-control mb-2" name="activo" required>
+                    <option value="true"  {% if fila[5] %}selected{% endif %}>Activo</option>
+                    <option value="false" {% if not fila[5] %}selected{% endif %}>Inactivo</option>
+                </select>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-vino-sec" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn-vino">Guardar cambios</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+{% extends "certificados.html" %}
+{% block titulo %}Resultados de certificados{% endblock %}
+{% block contenido %}
+<main class="layout-servicios">
+    <section class="contenedor-resultados">
+        <h1 class="resultados-titulo">Certificados de {{ tipo_certificado }}</h1>
+        <p class="resultados-detalle">Fecha: {{ fecha.strftime('%d/%m/%Y') }} &middot; Identificación: {{ numero_identificacion }}</p>
+
+        {% if certificados %}
+        <p class="resultados-cantidad">
+            {{ certificados|length }} {{ 'certificado encontrado' if certificados|length == 1 else 'certificados encontrados' }}
+        </p>
+        <div class="tabla-contenedor">
+            <table class="tabla-certificados">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tipo</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Identificación</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in certificados %}
+                    <tr>
+                        <td>{{ c.id_certificado }}</td>
+                        <td>{{ c.tipo_certificado|capitalize }}</td>
+                        <td>{{ c.fecha_certificado.strftime('%d/%m/%Y') }}</td>
+                        <td>{{ c.hora_certificado.strftime('%H:%M:%S') }}</td>
+                        <td>{{ c.documento }}</td>
+                        <td><a class="btn-ver" href="{{ url_for('certificado.ver_certificado', id_certificado=c.id_certificado) }}">Ver</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="sin-resultados" role="status">
+            <p>No se encontraron certificados con los datos ingresados.</p>
+        </div>
+        {% endif %}
+
+        <div class="acciones-certificado">
+            <a class="btn-volver" href="{{ url_for('pages.certificados') }}">Nueva búsqueda</a>
+        </div>
+    </section>
+</main>
+{% endblock %}

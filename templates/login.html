@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Inicia sesión — SIGCO</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/stylelogin.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_menu.css') }}">
+        <link rel="icon" href="../static/icono_1.png">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    </head>
+    <body>
+        <header class="header-menu menu-header">
+        <div class="navbar-menu menu-navbar">
+
+            <a class="menu-logo" href="{{ url_for('pages.sigco') }}">
+                <img class="menu-logo-img" src="{{ url_for('static', filename='icono_1.png') }}" alt="Logo SIGCO">
+                <span class="menu-logo-name">SIGCO</span>
+            </a>
+            <nav class="menu-tabs">
+                <a href="{{ url_for('pages.sigco') }}" class="menu-tab menu-tab-active">Inicio</a>
+                <a href="{{ url_for('pages.acerca') }}" class="menu-tab">Acerca de nosotros</a>
+                <a href="{{ url_for('pages.contact') }}" class="menu-tab">Contactanos</a>
+            </nav>
+
+        </div>
+        </header>
+    <div class="caja">
+        <div class="container-form">
+            <div class="information">
+                <div class="info-childs">
+                    <h1>BIENVENIDO</h1>
+                    <p><strong>¡Para conectarte, digita tus datos!</strong></p>
+                </div>
+            </div>
+
+            <div class="form-information">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul class="flash-messages">
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+                <form class="form" method="POST" action="{{ url_for('auth.login') }}">
+                    <label>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        fill="#a23939" viewBox="2 2 20 20">
+                        <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5m0-8c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3M4 22h16c.55 0 1-.45 1-1v-1c0-3.86-3.14-7-7-7h-4c-3.86 0-7 3.14-7 7v1c0 .55.45 1 1 1m6-7h4c2.76 0 5 2.24 5 5H5c0-2.76 2.24-5 5-5"></path>
+                        </svg>
+                        <input type="text" name="documento" placeholder="Documento">
+                    </label>
+                    <label>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        fill="#a23939" viewBox="2 2 20 20">
+                        <path d="M7 7c-2.76 0-5 2.24-5 5s2.24 5 5 5c2.41 0 4.43-1.72 4.9-4H15v2h2v-2h2v3h2v-3h1v-2H11.9A5 5 0 0 0 7 7m0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3"></path>
+                        </svg>
+                        <input type="password" name="contrasena" placeholder="contraseña">
+                    </label>
+                    <input type="hidden" name="next" value="{{ siguiente or '' }}">
+                    <input type="submit" value="Iniciar">
+                </form>
+            </div>
+        </div>
+    </div>
+
+  <footer class="pie">
+      <p>© 2026 SIGCO</p>
+      <ul class="pie-links">
+          <li><a href="{{ url_for('pages.acerca') }}">Acerca de nosotros</a></li>
+          <li><a href="{{ url_for('pages.contact') }}">Contactos</a></li>
+      </ul>
+  </footer>
+    </body>
+</html>

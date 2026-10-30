@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de pagos </title>
+    <link rel="icon" href="../static/icono_1.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style_pago.css', v='5') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_menu.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="seccion-blanca">
+
+   {% set tipo_navbar = 'admin' %}
+{% include 'components/navbar.html' %}
+
+    <main class="main-container admin-pagos">
+    <section class="form-card">
+
+        <div class="form-header">
+            <h1>Gestión y Verificación de Pagos</h1>
+            <p>PANEL DE ADMINISTRACIÓN - REVISIÓN DE COMPROBANTES</p>
+            <div class="linea-decorativa"></div>
+        </div>
+
+        {% with msgs = get_flashed_messages(with_categories=true) %}
+          {% for cat, msg in msgs %}<div class="alerta {{ cat }}">{{ msg }}</div>{% endfor %}
+        {% endwith %}
+
+        <!-- Filtro de búsqueda -->
+        <div class="admin-filter-container">
+            <form method="GET" action="{{ url_for('pago.admin_pagos') }}" class="filter-form">
+                <div class="form-group">
+                    <label for="residencia">Escribir número de residencia / documento:</label>
+                    <div class="filter-input-wrapper">
+                        <input type="text" id="residencia" name="residencia" value="{{ filtro or '' }}" placeholder="Ej: 101">
+                        <button type="submit" class="btn-filtrar">Buscar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        
+
+        {% if filtro %}
+        <div class="admin-filter-container">
+            <div class="form-group">
+                <label>Residentes encontrados:</label>
+                {% if residentes %}
+                    {% for r in residentes %}
+                    <div class="payment-info-text">
+                        <strong>{{ r[0] }}</strong> | Doc: {{ r[1] }} | Vivienda: {{ r[2] }} | Cuotas pendientes: {{ r[3] }}
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="section-desc">Ningún residente coincide con "{{ filtro }}".</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        
+        <div class="admin-filter-container">
+            <form method="POST" action="{{ url_for('pago.generar_cuotas') }}" class="filter-form">
+                <div class="form-group">
+                    <label>Generar cuotas del mes (mes, monto y fecha límite):</label>
+                    <div class="filter-input-wrapper">
+                        <input type="month" name="mes" required>
+                        <input type="number" name="monto" min="1" step="any" placeholder="Monto" required>
+                        <input type="date" name="fecha_lim" required>
+                        <button type="submit" class="btn-filtrar">Generar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Lista de pagos pendientes -->
+        <div class="payments-section-title">
+            <h2>Verificación de los Pagos de Usuario</h2>
+            <p class="section-desc">Revise el comprobante y apruebe o rechace cada pago. Si rechaza, indique el motivo.</p>
+        </div>
+
+        <div class="payments-list-header">
+            <span class="col-info">Detalle del pago</span>
+            <span class="col-check">Acción</span>
+        </div>
+
+        <div class="payments-list-body">
+            {% if pagos %}
+                {% for p in pagos %}
+                <div class="payment-row-item">
+                    <div class="payment-info-text">
+                        <strong>Pago #{{ p[0] }}</strong> | <strong>Fecha:</strong> {{ p[2] }}<br>
+                        <strong>Residente:</strong> {{ p[9] }} | <strong>Doc:</strong> {{ p[10] or 'N/A' }}<br>
+                        <strong>Vivienda:</strong> {{ p[7] }} | <strong>Abono:</strong> ${{ p[3] }} de ${{ p[8] }}<br>
+                        <span class="payment-meta">Método: {{ p[4] }}</span><br>
+                        <a href="{{ url_for('pago.ver_comprobante', nombre=p[6]) }}" target="_blank">Ver comprobante</a>
+                    </div>
+                    <form method="POST" action="{{ url_for('pago.validar_pago', idpago=p[0]) }}">
+                        <input type="text" name="observacion" placeholder="Motivo (obligatorio si rechaza)">
+                        <button type="submit" name="accion" value="aprobar" class="btn-submit">Aprobar</button>
+                        <button type="submit" name="accion" value="rechazar" class="btn-filtrar">Rechazar</button>
+                    </form>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-payments-msg">
+                    <p>No hay pagos pendientes por revisar en este momento.</p>
+                </div>
+            {% endif %}
+        </div>
+
+    </section>
+</main>
+<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+</body>
+</html>

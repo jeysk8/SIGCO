@@ -1,0 +1,53 @@
+<div class="modal fade modal-vino" id="modalActualizarres{{ fila[0] }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" method="POST" action="{{ url_for('reserva.consultar_reserva') }}">
+            <input type="hidden" name="accion" value="actualizar">
+            <input type="hidden" name="idreserva" value="{{ fila[0] }}">
+            <div class="modal-header">
+                <h5 class="modal-title">Actualizar reserva {{ fila[0] }}</h5>
+            </div>
+            <div class="modal-body">
+
+                <label class="mb-1">Tipo de servicio</label>
+                <select class="form-control mb-2" name="tipo_servicio" required>
+                    <option value="salon_eventos" {% if fila[1] == 'salon_eventos' %}selected{% endif %}>Salón de eventos</option>
+                    <!-- agrega aquí los demás tipos, con el mismo {% if fila[1] == '...' %}selected{% endif %} -->
+                </select>
+
+                <label class="mb-1">Fecha</label>
+                <input class="form-control mb-2" type="date" name="fecha" value="{{ fila[2] }}" required>
+
+                <label class="mb-1">Hora</label>
+                <input class="form-control mb-2" type="time" name="hora" value="{{ fila[3].strftime('%H:%M') }}" required>
+
+                <label class="mb-1">Cantidad de invitados</label>
+                <input class="form-control mb-2" type="number" name="cantidad_invitados" min="0" value="{{ fila[4] }}" required>
+
+                <label class="mb-1">Estado de la reserva</label>
+                <select class="form-control mb-2" name="estado" required>
+                    <option value="pendiente"  {% if fila[5] == 'pendiente' %}selected{% endif %}>Pendiente</option>
+                    <option value="confirmada" {% if fila[5] == 'confirmada' %}selected{% endif %}>Confirmada</option>
+                    <option value="cancelada"  {% if fila[5] == 'cancelada' %}selected{% endif %}>Cancelada</option>
+                </select>
+
+                <label class="mb-1">Usuario</label>
+                <select class="form-control mb-2" name="idusu" required>
+                    {% for u in usuarios %}
+                        <option value="{{ u[0] }}" {% if u[0] == fila[7] %}selected{% endif %}>{{ u[1] }}</option>
+                    {% endfor %}
+                </select>
+
+                <label class="mb-1">Activo</label>
+                <select class="form-control mb-2" name="activo" required>
+                    <option value="true"  {% if fila[8] %}selected{% endif %}>Activo</option>
+                    <option value="false" {% if not fila[8] %}selected{% endif %}>Inactivo</option>
+                </select>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-vino-sec" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn-vino">Guardar cambios</button>
+            </div>
+        </form>
+    </div>
+</div>

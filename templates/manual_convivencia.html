@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Convivencia</title>
+    <link rel="icon" href="../static/icono_1.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_menu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_manual.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="seccion-blanca">
+
+{% set tipo_navbar = 'inicio' %}
+{% include 'components/navbar.html' %}
+
+<main class="main-wrapper">
+    <div class="card-container-main">
+
+        <div class="manual-title-section">
+            <h1>Manual de Convivencia</h1>
+            <div class="linea-decorativa"></div>
+            <p class="manual-subtitle">REGLAMENTO Y NORMAS INTERNAS DEL CONJUNTO RESIDENCIAL PARA LA SANA CONVIVENCIA</p>
+        </div>
+
+      <!-- Barra Superior de Acciones (Botón de Descarga) -->
+        <div class="download-action-bar">
+            <div class="capitulos-badge">
+                Total de Capítulos: <strong>28 Capítulos</strong>
+            </div>
+            <div>
+                <a href="{{ url_for('manual.descargar_manual') }}" class="btn-descargar-pdf" download>
+                    DESCARGAR MANUAL COMPLETO <i class="fas fa-download"></i>
+                </a>
+            </div>
+
+      <!-- Lista de Normas -->
+            <div class="manual-rules-container">
+                <ul class="rules-list">
+                    <li class="rule-item">
+                        <div class="rule-header-row">
+                            <span class="rule-number-tag">Cap. I</span>
+                            <span class="rule-title-text">Uso Exclusivo del Inmueble</span>
+                        </div>
+                        <p class="rule-description-text">
+                            Las viviendas están destinadas exclusivamente para uso residencial familiar. Queda prohibido destinarlas a actividades comerciales, talleres o negocios.
+                        </p>
+                    </li>
+
+                    <li class="rule-item">
+                        <div class="rule-header-row">
+                            <span class="rule-number-tag">Cap. II</span>
+                            <span class="rule-title-text">Horarios de Ruido y Fiestas (Art. 28)</span>
+                        </div>
+                        <p class="rule-description-text">
+                            El volumen de música y ruidos debe mantenerse moderado. Los horarios permitidos son:
+                        </p>
+                        <ul class="rule-sublist">
+                            <li>Lunes a Jueves: 4:00 PM a 9:00 PM</li>
+                            <li>Viernes y Sábados: Hasta la 1:00 AM</li>
+                            <li>Domingos y Festivos: Hasta las 9:00 PM</li>
+                        </ul>
+                    </li>
+
+                    <li class="rule-item">
+                        <div class="rule-header-row">
+                            <span class="rule-number-tag">Cap. III</span>
+                            <span class="rule-title-text">Manejo de Basuras y Residuos (Art. 40)</span>
+                        </div>
+                        <p class="rule-description-text">
+                            La basura debe depositarse anudada en bolsas plásticas dentro del shut o canecas. Está estrictamente prohibido dejar basuras en pasillos, escaleras o zonas comunes.
+                        </p>
+                    </li>
+
+                    <li class="rule-item">
+                        <div class="rule-header-row">
+                            <span class="rule-number-tag">Cap. IV</span>
+                            <span class="rule-title-text">Tenencia de Mascotas (Art. 43)</span>
+                        </div>
+                        <p class="rule-description-text">
+                            Deben transitar en áreas comunes siempre sujetas con correa o traílla (y bozal para razas de cuidado especial). Es obligatorio recoger sus excrementos de inmediato. Queda prohibido el ingreso de mascotas a la piscina.
+                        </p>
+                    </li>
+
+                    <li class="rule-item">
+                        <div class="rule-header-row">
+                            <span class="rule-number-tag">Cap. V</span>
+                            <span class="rule-title-text">Uso de Balcones y Fachadas (Art. 39)</span>
+                        </div>
+                        <p class="rule-description-text">
+                            No se permite colgar ropa, traperos o calzado a la vista en ventanas o balcones, ni alterar la estética exterior del conjunto.
+                        </p>
+                    </li>
+
+                    <li class="rule-item">
+                        <div class="rule-header-row">
+                            <span class="rule-number-tag">Cap. VI</span>
+                            <span class="rule-title-text">Velocidad y Parqueaderos (Art. 32 y 76)</span>
+                        </div>
+                        <p class="rule-description-text">
+                            El límite máximo de velocidad al interior del conjunto es de <strong>10 km/h</strong>. Queda prohibida la conducción de vehículos por parte de menores de edad.
+                        </p>
+                    </li>
+
+                    <li class="rule-item">
+                        <div class="rule-header-row">
+                            <span class="rule-number-tag">Cap. VII</span>
+                            <span class="rule-title-text">Uso de la Piscina (Art. 55 y 57)</span>
+                        </div>
+                        <p class="rule-description-text">
+                            Es obligatorio el uso de gorro y vestido de baño adecuado. Los menores de 12 años deben estar acompañados permanentemente por un adulto responsable.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+  <footer class="pie">
+      <p>© 2026 SIGCO</p>
+      <ul class="pie-links">
+          <li><a href="{{ url_for('pages.acerca') }}">Acerca de nosotros</a></li>
+          <li><a href="{{ url_for('pages.contact') }}">Contactos</a></li>
+      </ul>
+  </footer>
+
+<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+</body>
+</html>

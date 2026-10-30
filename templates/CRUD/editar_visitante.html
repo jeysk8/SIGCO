@@ -1,0 +1,69 @@
+<div class="modal fade modal-vino" id="modalActualizarvis{{ fila[0] }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" method="POST" action="{{ url_for('visitante.consulta_visit') }}">
+            <input type="hidden" name="accion" value="actualizar">
+            <input type="hidden" name="idvisi" value="{{ fila[0] }}">
+            <div class="modal-header">
+                <h5 class="modal-title">Actualizar visitante {{ fila[0] }}</h5>
+            </div>
+            <div class="modal-body">
+
+                <label class="mb-1">Nombre</label>
+                <input class="form-control mb-2" name="nombre" maxlength="60" value="{{ fila[1] }}" required>
+
+                <label class="mb-1">Apellido</label>
+                <input class="form-control mb-2" name="apellido" maxlength="60" value="{{ fila[2] }}" required>
+
+                <label class="mb-1">Fecha de nacimiento</label>
+                <input class="form-control mb-2" type="date" name="fecha_nac" value="{{ fila[3] or '' }}" required>
+
+                <label class="mb-1">Género</label>
+                <select class="form-control mb-2" name="genero" required>
+                    <option value="M" {% if fila[4] == 'M' %}selected{% endif %}>Masculino</option>
+                    <option value="F" {% if fila[4] == 'F' %}selected{% endif %}>Femenino</option>
+                </select>
+
+                <label class="mb-1">Tipo de documento</label>
+                <select class="form-control mb-2" name="tipodoc" required>
+                    <option value="CC" {% if fila[5] == 'CC' %}selected{% endif %}>CC</option>
+                    <option value="TI" {% if fila[5] == 'TI' %}selected{% endif %}>TI</option>
+                    <option value="CE" {% if fila[5] == 'CE' %}selected{% endif %}>CE</option>
+                    <option value="PP" {% if fila[5] == 'PP' %}selected{% endif %}>PP</option>
+                </select>
+
+                <label class="mb-1">Número de documento</label>
+                <input class="form-control mb-2" type="number" name="documento" min="1" value="{{ fila[6] }}" required>
+
+                <label class="mb-1">Tipo de vehículo (opcional)</label>
+                <select class="form-control mb-2" name="tipo_vehiculo">
+                    <option value="" {% if not fila[8] %}selected{% endif %}>Sin vehículo</option>
+                    <option value="Carro" {% if fila[8] == 'Carro' %}selected{% endif %}>Carro</option>
+                    <option value="Moto" {% if fila[8] == 'Moto' %}selected{% endif %}>Moto</option>
+                    <option value="Bicicleta" {% if fila[8] == 'Bicicleta' %}selected{% endif %}>Bicicleta</option>
+                </select>
+
+                <label class="mb-1">Placa (opcional)</label>
+                <input class="form-control mb-2" name="placa" maxlength="6"
+                       value="{{ fila[7] or '' }}" style="text-transform:uppercase">
+
+                <label class="mb-1">Residente que visita</label>
+                <select class="form-control mb-2" name="idusu" required>
+                    {% for u in usuarios %}
+                        <option value="{{ u[0] }}" {% if u[0] == fila[10] %}selected{% endif %}>{{ u[1] }}</option>
+                    {% endfor %}
+                </select>
+
+                <label class="mb-1">Estado</label>
+                <select class="form-control mb-2" name="activo" required>
+                    <option value="true"  {% if fila[11] %}selected{% endif %}>Activo</option>
+                    <option value="false" {% if not fila[11] %}selected{% endif %}>Inactivo</option>
+                </select>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-vino-sec" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn-vino">Guardar cambios</button>
+            </div>
+        </form>
+    </div>
+</div>

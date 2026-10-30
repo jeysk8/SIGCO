@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conjunto Residencial</title>
+    <link rel="icon" href="../static/icono_1.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_menu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_chat.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="seccion-blanca">
+<header class="header-menu">
+    <div class="navbar-menu">
+        <span class="vino page-name">Conjunto Residencial</span>
+        
+        <div class="header-right">
+        <span class="username vino">@{{ username }}</span>
+
+            <button class="icon-btn" type="button" aria-label="Notificaciones">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoi="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-39"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+            <span class="notif-dot"></span>
+            </button> 
+
+            <div class="settings-wrapper">
+            <button class="icon-btn" type="button" id="settings-btn" arial-haspopup="true" arial-expanded="false" aria-label="Configuración">
+                //<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoi="round"><circule cx="12" cy="12" r="3"></circule><path d="M19.4 15a1.65" terminar></path></svg>//
+                </button>
+                <div class="settings-dropdown" id="settings-dropdown">
+                    <a href="{{url_for('menu.menu')}}">Volver al menú</a>
+                    <a href="#">Cerrar sesión</a>
+                    <a href="#">Editar cuenta</a>
+                    <a href="#">Ayuda</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</header>
+<main class="chat-section">
+    <div class="chat-card">
+        <div class="chat-card-header">
+            <div class="chat-title-box">
+                <span style="font-size: 1.5rem;"></span>
+                <h2 class="vino">Canal de Comunicación</h2>
+            </div>
+            <div class="destino-wrapper vino">
+                <lader for="rol_destino"> Envia a:</lader>
+                <select id="rol_destino" class="destino-select">
+                    <option value="admi">Administración</option>
+                    <option value="vigilante">vigilante</option>
+                    <option value="contador">Contabilidad</option>
+                    <option value="mantenimiento">Mantenimiento</option>
+                </select>
+            </div>
+        </div>
+        <div id="clat-box">
+            {% for msg in historial %}
+            <div class="mensaje-bubble {% if msg[1] == usuario_id %}propio{% else %}resivido{% endif %}">
+            {% if msg[1] != usuario_id %}
+                <div class="mensaje-autor">{{ msg[5] if msg[5] else 'Usuario' }}</div>
+            {% endif %}
+                <div class="mensaje-texto">{{ msg[3] }}</div>
+                <div class="mensaje-info">{{ msg[4] }}</div>      
+        </div>
+        {% endfor %}
+        </div>
+
+        <div class="chat-footer">
+            <input type="text" id="menssage-input" placeholder="Escribe tu mensaje..." onkeypress="evaluarEnter(event)">
+            <button class="btn-enviar-chat" onclick="sendMessage()" aria-label="Enviar mensaje">
+            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10L15 2-15 2z"></path></svg>
+            </button>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+<script>
+    const settingsBtn = document.getElementById('settings-btn');
+    const settingsDropdown = document.getElementById('settings-dropdown');
+
+    settingsBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = settingsDropdown.classList.toggle('open');
+        settingsBtn.setAttribute('aria-expanded', isOpen);
+    });
+    document.addEventListener('click',(e) => {
+        if(!settingsDropdown.contains(e.target) && e.target !== settingsBtn){
+            settingsDropdown.classList.remove('open');
+            settingsBtn.setAttribute('aria_expanded', false);
+        }
+    });
+    var socket = io();
+    var miUsuarioId = {{ usuario_id }};
+    var chatBox = document.getElementById('chat-box');
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    socket.on('numero_mensaje', function(data){
+        var esMio = (data.emisor_id == miUsuarioId);
+        var claseBubble = esMio ? 'propio': 'recibido';
+
+        var divMensaje = document.createElement('div');
+        divMensaje.className = 'mensaje-bubble' + claseBubble;
+
+        var contenidoHtml = '';
+        if (!esMio && data.nombre_emisor){
+            contenidoHtml += '<div class="mensaje-autor">' + data.nombre_emisor + '</div>';
+        }
+        contenidohtml += '<div class="mensaje-texto">' + data.mensaje +'</div>' +
+                        '<div class="mensaje-info">' + data.hora + '</div>';
+
+        divMensaje.innerHTML = contenidoHtml;
+        chaBot.appendChild(divMensaje);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    });
+
+    function sendMessage() {
+        var input = document.getElementById('message-input');
+        var destino = document.getElementById('rol_destino').value;
+        var texto = input.value.trim();
+
+        if (texto !== "") {
+            socket.emit('enviar_mensaje', {
+                'mensaje': texto,
+                'rol_destino': destino
+            });
+            input.value = '';
+        }
+    }
+    function evaluarEnter(event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    }
+</script>
+<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+</body>
+</html>

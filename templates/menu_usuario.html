@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú</title>
+    <link rel="icon" href="../static/icono_1.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_menu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_usuario.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="seccion-blanca">
+
+{% set tipo_navbar = 'usuario' %}
+{% include 'components/navbar.html' %}
+
+<main class="cards-section usr-section">
+    <div class="usr-titulo">
+        <h1>Panel de usuario</h1>
+    </div>
+
+    <div class="cards-grid">
+        <a class="portal-card usr-card" href="{{ url_for('pages.pagos_usuario') }}">
+            <span class="card-icon">🪙</span>
+            <span class="card-name vino">Pagos</span>
+        </a>
+
+        <a class="portal-card usr-card" href="{{ url_for('pages.certificados') }}">
+            <span class="card-icon">🧾</span>
+            <span class="card-name vino">Certificados</span>
+        </a>
+
+        <a class="portal-card usr-card" href="{{ url_for('pages.solicitudes') }}">
+            <span class="card-icon">✉️</span>
+            <span class="card-name vino">Solicitudes</span>
+        </a>
+
+        <a class="portal-card usr-card" href="{{ url_for('pages.comunicados') }}">
+            <span class="card-icon">📣</span>
+            <span class="card-name vino">Comunicados</span>
+        </a>
+
+        <a class="portal-card usr-card" href="{{ url_for('pages.visitas') }}">
+            <span class="card-icon">👤</span>
+            <span class="card-name vino">Visitas</span>
+        </a>
+
+        <a class="portal-card usr-card" href="{{ url_for('pages.servicios') }}">
+            <span class="card-icon">📑</span>
+            <span class="card-name vino">Servicios</span>
+        </a>
+
+        <a class="portal-card usr-card" href="{{ url_for('pages.comunidad') }}">
+            <span class="card-icon">💬</span>
+            <span class="card-name vino">Comunidad</span>
+        </a>
+
+        <a class="portal-card usr-card" href="{{ url_for('pages.contact') }}">
+            <span class="card-icon">🗣️</span>
+            <span class="card-name vino">Contactos</span>
+        </a>
+
+        <a class="portal-card usr-card" href="{{ url_for('pages.manual_convivencia') }}">
+            <span class="card-icon">📙</span>
+            <span class="card-name vino">Manual De Convivencia</span>
+        </a>
+
+    </div>
+</main>
+
+
+<footer class="pie">
+        <p>© 2026 SIGCO</p>
+        <ul class="pie-links">
+            <li><a href="{{ url_for('pages.acerca') }}">Acerca de nosotros</a></li>
+            <li><a href="{{ url_for('pages.contact') }}">Contactos</a></li>
+        </ul>
+    </footer>
+
+<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,369 @@
+:root {
+    --com-vino: rgb(73, 41, 34);        /* #492922 */
+    --com-rosado: rgb(255, 213, 206);
+    --com-terracota: #A52727;
+    --com-texto: #6b4c43;
+    --com-crema: #FBEFCB;
+    --com-rosa-claro: #F3E4E0;
+    --com-blanco: #ffffff;
+    --com-sombra: 0 5px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Header de Comunidad ---------- */
+
+.com-navbar {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.com-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: inherit;
+}
+
+.com-logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border: 1px solid var(--com-vino);
+    border-radius: 4px;
+    background: var(--com-blanco);
+}
+
+.com-logo-name {
+    font-size: 11px;
+    color: var(--com-vino);
+}
+
+.com-tabs {
+    display: flex;
+    gap: 1rem;
+}
+
+.com-tab {
+    font-size: 13px;
+    color: #1c1c20;
+    white-space: nowrap;
+}
+
+.com-tab:hover {
+    color: var(--com-vino);
+}
+
+.com-header .header-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.com-header .profile-icon {
+    width: 26px;
+    height: 26px;
+    color: var(--com-vino);
+}
+
+.com-login-btn {
+    padding: 6px 16px;
+    border: 1px solid var(--com-vino);
+    border-radius: 20px;
+    font-size: 13px;
+    color: var(--com-vino);
+    background: var(--com-blanco);
+    white-space: nowrap;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.com-login-btn:hover {
+    background: var(--com-vino);
+    color: var(--com-blanco);
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .com-navbar {
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .com-header .header-right {
+        margin-left: 0;
+    }
+}
+
+/* ---------- Contenido de Comunidad ---------- */
+
+
+.settings-wrapper:focus-within .settings-dropdown {
+    display: flex;
+}
+
+.com-main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 36px 24px 64px;
+}
+
+.com-encabezado {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.com-encabezado h1 {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 800;
+    color: var(--com-vino);
+}
+
+.com-subtitulo {
+    color: var(--com-texto);
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-top: 4px;
+}
+
+.com-composer {
+    background-color: var(--com-blanco);
+    border-radius: 18px;
+    box-shadow: var(--com-sombra);
+    padding: 22px 24px;
+    margin-bottom: 40px;
+}
+
+.com-composer h2,
+.com-feed h2 {
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.com-composer h2 {
+    margin-bottom: 12px;
+}
+
+#com-contenido {
+    width: 100%;
+    min-height: 96px;
+    resize: vertical;
+    font-family: "Nunito", sans-serif;
+    font-size: 0.98rem;
+    color: #333;
+    background: var(--com-blanco);
+    border: 1.5px solid rgba(73, 41, 34, 0.25);
+    border-radius: 14px;
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#com-contenido:focus {
+    border-color: var(--com-vino);
+    box-shadow: 0 0 0 3px rgba(73, 41, 34, 0.12);
+}
+
+#com-contenido.com-invalido {
+    border-color: var(--com-terracota);
+}
+
+.com-acciones {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+}
+
+.com-acciones-izq {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.com-foto-input {
+    max-width: 100%;
+    font-family: "Nunito", sans-serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--com-texto);
+}
+
+.com-foto-input::file-selector-button {
+    margin-right: 10px;
+    padding: 6px 14px;
+    border: 1.5px solid rgba(73, 41, 34, 0.25);
+    border-radius: 20px;
+    background: transparent;
+    font-family: "Nunito", sans-serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--com-vino);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.com-foto-input::file-selector-button:hover {
+    background: rgba(73, 41, 34, 0.08);
+}
+
+.com-estado a {
+    color: var(--com-terracota);
+    text-decoration: underline;
+}
+
+.com-contador {
+    font-size: 0.82rem;
+    color: var(--com-texto);
+}
+
+#com-publicar:disabled,
+#com-contenido:disabled,
+.com-foto-input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.com-mensaje {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.com-mensaje.com-ok {
+    background: var(--com-crema);
+    color: var(--com-vino);
+}
+
+.com-mensaje.com-error {
+    background: var(--com-rosa-claro);
+    color: var(--com-terracota);
+}
+
+.com-feed h2 {
+    margin-bottom: 18px;
+}
+
+.com-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+.com-card {
+    background-color: var(--com-blanco);
+    border-radius: 18px;
+    box-shadow: var(--com-sombra);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow-wrap: anywhere;
+    transition: box-shadow 0.2s ease;
+}
+
+.com-card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.com-card-cabecera {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.com-avatar {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--com-rosado);
+    color: var(--com-vino);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+}
+
+.com-autor {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--com-vino);
+    margin: 0;
+}
+
+.com-fecha {
+    display: block;
+    font-size: 0.82rem;
+    color: var(--com-texto);
+}
+
+.com-texto {
+    color: #333;
+    font-weight: 400;
+    font-size: 0.97rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.com-card-img {
+    width: 100%;
+    max-height: 320px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.com-estado {
+    text-align: center;
+    color: var(--com-texto);
+    font-weight: 600;
+    padding: 24px 0;
+}
+
+.com-mas-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+}
+
+@media (max-width: 700px) {
+    .com-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .com-composer {
+        padding: 18px 16px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}
+
+/* "@nombre" cuando hay sesión iniciada */
+.com-usuario {
+  padding: 6px 14px;
+  border: 1px solid var(--com-vino);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: var(--com-vino);
+  background: var(--com-blanco);
+  white-space: nowrap;
+}

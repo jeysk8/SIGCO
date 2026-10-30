@@ -1,0 +1,26 @@
+<div class="modal fade modal-vino" id="modalRegistrarrol" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" method="POST" action="{{ url_for('rol.consultar_rol') }}">
+            <input type="hidden" name="accion" value="registrar">
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar rol</h5>
+            </div>
+            <div class="modal-body">
+
+                <label class="mb-1">Nombre del rol</label>
+                <input class="form-control mb-2" name="tipo_rol" maxlength="40" required>
+
+                <label class="mb-1">Estado</label>
+                <select class="form-control mb-2" name="activo" required>
+                    <option value="true" selected>Activo</option>
+                    <option value="false">Inactivo</option>
+                </select>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-vino-sec" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn-vino">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidad</title>
+    <link rel="icon" href="{{ url_for('static', filename='icono_1.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_menu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_comun.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="seccion-blanca">
+
+{% set tipo_navbar = 'inicio' %}
+{% include 'components/navbar.html' %}
+
+<main class="com-main">
+
+    <section class="com-encabezado">
+        <h1>Comunidad</h1>
+        <p class="com-subtitulo">Comparte tus ideas y opiniones con tus vecinos.</p>
+    </section>
+
+    <section class="com-composer" aria-labelledby="com-composer-titulo">
+        <h2 id="com-composer-titulo">¿Que quieres compartir?</h2>
+
+        <form id="com-form" action="{{ url_for('comunidad.publicar') }}" method="post" enctype="multipart/form-data" novalidate>
+            <textarea id="com-contenido" name="contenido" rows="3" maxlength="{{ max_caracteres }}"
+                      class="{{ 'com-invalido' if texto_invalido }}"
+                      placeholder="Escribe tu publicacion..." aria-label="Contenido de la publicacion"
+                      {% if not autenticado %}disabled{% endif %}>{{ contenido }}</textarea>
+
+            <div class="com-acciones">
+                <div class="com-acciones-izq">
+                    <input type="file" id="com-foto" class="com-foto-input" name="imagen"
+                           accept="image/jpeg,image/png,image/webp,image/gif"
+                           aria-label="Añadir foto (JPG, PNG, WEBP o GIF, maximo 3 MB)"
+                           {% if not autenticado %}disabled{% endif %}>
+                    <span class="com-contador">Máx. {{ max_caracteres }} caracteres · foto hasta 3 MB</span>
+                </div>
+                <button type="submit" id="com-publicar" class="action_btn" {% if not autenticado %}disabled{% endif %}>Publicar</button>
+            </div>
+
+            {% if mensaje %}
+            <p id="com-mensaje" class="com-mensaje {{ 'com-ok' if mensaje_tipo == 'ok' else 'com-error' }}" role="status" aria-live="polite">{{ mensaje }}</p>
+            {% endif %}
+        </form>
+    </section>
+
+    <section class="com-feed" aria-labelledby="com-feed-titulo">
+        <h2 id="com-feed-titulo">Publicaciones recientes</h2>
+
+        {% if not autenticado %}
+            <p class="com-estado"><a href="{{ url_for('auth.login', next=request.path) }}">Inicia sesión</a> para ver y compartir publicaciones.</p>
+        {% elif error_carga %}
+            <p class="com-mensaje com-error" role="alert">{{ error_carga }}</p>
+        {% elif not publicaciones %}
+            <p class="com-estado">Aún no hay publicaciones. Sé el primero en compartir una idea.</p>
+        {% else %}
+            <div id="com-grid" class="com-grid">
+                {% for p in publicaciones %}
+                <article class="com-card">
+                    <div class="com-card-cabecera">
+                        <div class="com-avatar" aria-hidden="true">{{ p.inicial }}</div>
+                        <div>
+                            <h3 class="com-autor">{{ p.autor }}</h3>
+                            <time class="com-fecha" datetime="{{ p.fecha_iso }}">{{ p.fecha }}</time>
+                        </div>
+                    </div>
+                    <p class="com-texto">{{ p.contenido }}</p>
+                    {% if p.imagen %}
+                    <img class="com-card-img" src="{{ url_for('static', filename='uploads/comunidad/' ~ p.imagen) }}"
+                         alt="Imagen adjunta a la publicación de {{ p.autor }}" loading="lazy">
+                    {% endif %}
+                </article>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if autenticado and (hay_mas or antes_de) %}
+        <div class="com-mas-wrap">
+            {% if antes_de %}
+            <a href="{{ url_for('pages.comunidad') }}" class="action_btn">Volver a las más recientes</a>
+            {% endif %}
+            {% if hay_mas %}
+            <a href="{{ url_for('pages.comunidad', antes_de=ultimo_id) }}" class="action_btn">Ver publicaciones anteriores</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </section>
+
+</main>
+
+</body>
+</html>

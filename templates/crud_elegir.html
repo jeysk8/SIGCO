@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Usuarios</title>
+    <link rel="icon" href="../static/icono_1.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_menu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_admin.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_consulta.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <style>
+        body.seccion-blanca {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Nunito", sans-serif;
+            background: #FFD5CE;
+            color: #492922;
+        }
+
+        .adm-section {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .adm-card {
+            color: #FFD5CE;
+        }
+
+        .adm-card p {
+            color: #FFFFFF;
+            margin: 0;
+        }
+
+        .adm-card .card-name {
+            color: #FFD5CE;
+        }
+
+        .adm-titulo p {
+            color: #492922;
+        }
+    </style>
+</head>
+
+
+
+<body class="seccion-blanca">
+
+{% set tipo_navbar = 'admin' %}
+{% include 'components/navbar.html' %}
+<main class="cards-section adm-section">
+    <div class="adm-titulo">
+        <br>
+        <h1>Selección de tablas</h1>
+        <br>
+        <p class="negro">Modifica o consulta cualquiera de las siguientes tablas directamente de la base de datos</p>
+    </div>
+
+    <div class="cards-grid">
+        <a class="portal-card adm-card" href="{{ url_for('usuario.consulta_usuario') }}">
+            <span class="card-name vino">Usuarios</span>
+            <p>Consulta la tabla de Usuarios</p>
+        </a>
+
+        <a class="portal-card adm-card" href="{{ url_for('usuario_rol.consultar_usuario_rol')}}">
+            <span class="card-name vino">Roles de usuarios</span>
+            <p>Consulta la tabla que controla qué rol posee cada usuario</p>
+        </a>
+        
+        <a class="portal-card adm-card" href="{{url_for('rol.consultar_rol') }}">
+            <span class="card-name vino">Roles </span>
+            <p>Consulta la tabla de Roles existentes</p>
+        </a>
+
+        <a class="portal-card adm-card" href="{{url_for('reserva.consultar_reserva')}}">
+            <span class="card-name vino">Reserva de servicios</span>
+            <p>Consulta la tabla de reservas de servicios</p>
+        </a>
+
+        <a class="portal-card adm-card" href="{{url_for('propiedad.consultar_propiedad')}}">
+            <span class="card-name vino">Propiedades</span>
+            <p>Consulta la tabla de propiedades existentes</p>
+        </a>
+
+       <a class="portal-card adm-card" href="{{ url_for('visitante.consulta_visit') }}">    
+            <span class="card-name vino">Visitantes</span>
+            <p>Consulta la tabla que registra cada visitante</p>
+        </a>
+
+        <a class="portal-card adm-card" href="{{url_for('cuota.consultar_cuota')}}">
+            <span class="card-name vino">Cuotas</span>
+            <p>Consulta la tabla de cuotas</p>
+        </a>
+
+       <a class="portal-card adm-card" href="#">
+            <span class="card-name vino">Comunidad Publicación</span>
+            <p>Consulta la tabla que almacena las publicaciones del apartado comunidad</p>
+        </a>
+
+        <a class="portal-card adm-card" href="{{url_for('pago_crud.consultar_pago')}}">
+            <span class="card-name vino">Pagos</span>
+            <p>Consulta la tabla que de pagos</p>
+        </a>
+
+
+    </div>
+</main>
+
+   <footer class="pie">
+        <p>© 2026 SIGCO</p>
+        <ul class="pie-links">
+            <li><a href="{{ url_for('pages.acerca') }}">Acerca de nosotros</a></li>
+            <li><a href="{{ url_for('pages.contact') }}">Contactos</a></li>
+        </ul>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,52 @@
+{% extends "certificados.html" %}
+{% block titulo %}Certificado {{ c.id_certificado }}{% endblock %}
+{% block contenido %}
+<main class="layout-servicios">
+    <section class="contenedor-resultados">
+        <article class="certificado-doc">
+            <h1 class="certificado-titulo">Certificado de {{ c.tipo_certificado }}</h1>
+            <p class="certificado-numero">N.º {{ c.id_certificado }}</p>
+
+            <dl class="certificado-datos">
+                <dt>Residente</dt>
+                <dd>{{ c.nombre }} {{ c.apellido }}</dd>
+
+                <dt>Documento</dt>
+                <dd>{{ c.tipo_documento }} {{ c.documento }}</dd>
+
+                {% if c.numvivienda %}
+                <dt>Vivienda</dt>
+                <dd>{{ c.tipo_vivienda }} {{ c.numvivienda }}</dd>
+                {% endif %}
+
+                {% if c.idpago %}
+                <dt>Pago</dt>
+                <dd>N.º {{ c.idpago }}</dd>
+
+                <dt>Fecha del pago</dt>
+                <dd>{{ c.fecha_pago.strftime('%d/%m/%Y') if c.fecha_pago else '—' }}</dd>
+
+                <dt>Monto</dt>
+                <dd>{{ '{:,.2f}'.format(c.monto_pago) if c.monto_pago is not none else '—' }}</dd>
+
+                <dt>Método</dt>
+                <dd>{{ c.metodo or '—' }}</dd>
+
+                {% if c.codigo_certificado %}
+                <dt>Código de certificación</dt>
+                <dd>{{ c.codigo_certificado }}</dd>
+                {% endif %}
+                {% endif %}
+
+                <dt>Generado el</dt>
+                <dd>{{ c.fecha_certificado.strftime('%d/%m/%Y') }} a las {{ c.hora_certificado.strftime('%H:%M:%S') }}</dd>
+            </dl>
+        </article>
+
+        <div class="acciones-certificado">
+            <button type="button" class="btn-registrar" onclick="window.print()">Imprimir o guardar como PDF</button>
+            <a class="btn-volver" href="{{ url_for('pages.certificados') }}">Nueva búsqueda</a>
+        </div>
+    </section>
+</main>
+{% endblock %}

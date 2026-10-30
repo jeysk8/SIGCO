@@ -1,0 +1,62 @@
+/* Menú de usuario — solo lo visual propio. Depende de style_menu.css (rejilla, encabezado)
+   y copia los colores del principal con prefijo --usr- (los colores se cambiarán después). */
+:root {
+  --usr-vino: rgb(73, 41, 34);      /* #492922 */
+  --usr-rosa: rgb(255, 213, 206);
+  --usr-rosa-suave: #fff3f0;
+  --usr-naranja: rgb(250, 154, 81);
+}
+
+.usr-titulo {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.usr-titulo h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 800;
+  color: var(--usr-vino);
+}
+
+/* Tarjetas blancas con el mismo borde naranja del menú admin */
+.usr-card {
+  background-color: #fff;
+  border-top: 4px solid var(--usr-naranja);
+}
+
+.usr-card .card-name {
+  font-weight: 700;
+}
+
+.usr-card:hover {
+  background-color: var(--usr-rosa-suave);
+}
+
+.usr-card:focus-visible {
+  outline: 3px solid var(--usr-naranja);
+}
+
+/* Ajustes exclusivos del menú de vigilante y usuario */
+.usr-titulo p {
+  color: var(--usr-vino);
+  font-family: "Nunito", sans-serif;
+  font-weight: 400;
+  text-align: center;
+}
+
+.usr-card p {
+  color: #1c1c20;
+  font-family: "Nunito", sans-serif;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.usr-section {
+  width: 100%;
+}
+
+.usr-section .cards-grid {
+  width: 100%;
+}

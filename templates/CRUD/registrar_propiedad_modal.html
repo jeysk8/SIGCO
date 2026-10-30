@@ -1,0 +1,34 @@
+<div class="modal fade modal-vino" id="modalRegistrarpro" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" method="POST" action="{{ url_for('propiedad.consultar_propiedad') }}">
+            <input type="hidden" name="accion" value="registrar">
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar propiedad</h5>
+            </div>
+            <div class="modal-body">
+
+                <label class="mb-1">Tipo de vivienda</label>
+                <select class="form-control mb-2" name="tipo_vivienda" required>
+                    <option value="" disabled selected>Selecciona el tipo</option>
+                    <option value="Apartamento">Apartamento</option>
+                    <option value="Casa">Casa</option>
+                </select>
+
+                <label class="mb-1">Número / Torre</label>
+                <input class="form-control mb-2" name="numvivienda" maxlength="100"
+                       placeholder="Ej: Torre 01 - 101" required>
+
+                <label class="mb-1">Estado</label>
+                <select class="form-control mb-2" name="activo" required>
+                    <option value="true" selected>Activo</option>
+                    <option value="false">Inactivo</option>
+                </select>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-vino-sec" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn-vino">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>

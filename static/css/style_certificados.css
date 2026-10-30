@@ -1,0 +1,200 @@
+.contenedor-resultados {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.resultados-titulo {
+  color: var(--serv-vino);
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-transform: none;
+  margin: 0;
+  text-align: center;
+}
+
+.resultados-detalle,
+.resultados-cantidad {
+  color: var(--serv-texto);
+  font-size: 0.95rem;
+  margin: 0;
+  text-align: center;
+}
+
+.resultados-cantidad {
+  font-weight: 700;
+  color: var(--serv-vino);
+}
+
+.tabla-contenedor {
+  width: 100%;
+  overflow-x: auto;
+  border: 2px solid var(--serv-vino);
+  border-radius: 20px;
+  background-color: var(--serv-blanco);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+}
+
+.tabla-certificados {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.95rem;
+}
+
+.tabla-certificados th {
+  background-color: var(--serv-rosa);
+  color: var(--serv-vino);
+  font-weight: 800;
+  text-align: left;
+  padding: 0.85rem 1rem;
+  white-space: nowrap;
+}
+
+.tabla-certificados td {
+  padding: 0.85rem 1rem;
+  color: var(--serv-texto);
+  border-top: 1px solid rgba(73, 41, 34, 0.15);
+  white-space: nowrap;
+}
+
+.tabla-certificados tbody tr:hover {
+  background-color: rgba(255, 213, 206, 0.35);
+}
+
+.btn-ver,
+.btn-volver {
+  display: inline-block;
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-ver {
+  padding: 6px 18px;
+  font-size: 0.85rem;
+  color: var(--serv-blanco);
+  background-color: var(--serv-vino);
+}
+
+.btn-ver:hover {
+  background-color: var(--serv-rojo);
+  transform: scale(1.05);
+}
+
+.btn-volver {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  color: var(--serv-vino);
+  background-color: var(--serv-blanco);
+  border: 2px solid var(--serv-vino);
+}
+
+.btn-volver:hover {
+  background-color: var(--serv-vino);
+  color: var(--serv-blanco);
+  transform: scale(1.05);
+}
+
+.sin-resultados {
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem 1.5rem;
+  border: 2px solid var(--serv-vino);
+  border-radius: 20px;
+  background-color: var(--serv-blanco);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.sin-resultados p {
+  margin: 0;
+  color: var(--serv-vino);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.acciones-certificado {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.certificado-doc {
+  width: 100%;
+  max-width: 600px;
+  padding: 2rem 2.5rem;
+  border: 2px solid var(--serv-vino);
+  border-radius: 20px;
+  background-color: var(--serv-blanco);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+}
+
+.certificado-titulo {
+  color: var(--serv-vino);
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin: 0;
+}
+
+.certificado-numero {
+  color: var(--serv-rojo);
+  font-weight: 700;
+  text-align: center;
+  margin: 0.3rem 0 1.5rem;
+}
+
+.certificado-datos {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.7rem 1.5rem;
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+}
+
+.certificado-datos dt {
+  color: var(--serv-vino);
+  font-weight: 800;
+}
+
+.certificado-datos dd {
+  margin: 0;
+  color: var(--serv-texto);
+}
+
+@media (max-width: 600px) {
+  .certificado-doc {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .certificado-datos {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+
+  .certificado-datos dd {
+    margin-bottom: 0.7rem;
+  }
+}
+
+@media print {
+  .header-menu,
+  .pie,
+  .aviso,
+  .acciones-certificado {
+    display: none;
+  }
+
+  .certificado-doc {
+    box-shadow: none;
+    max-width: 100%;
+  }
+}

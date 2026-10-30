@@ -1,0 +1,263 @@
+:root {
+  --serv-vino: rgb(73, 41, 34);      /* #492922 */
+  --serv-rojo: #A52727;
+  --serv-rosa: rgb(255, 213, 206);
+  --serv-blanco: #ffffff;
+  --serv-texto: #1c1c20;
+  --serv-naranja: rgb(250, 154, 81);
+}
+
+/* ---------- Estructura de la página ---------- */
+
+body.servicios-page {
+  display: flex;
+  flex-direction: column;
+  /* Compensa el margin-top:-10px de .seccion-blanca (style.css)
+     para que el pie quede pegado al borde inferior */
+  min-height: calc(100vh + 10px);
+}
+
+/* ---------- Header ---------- */
+
+.servicios-navbar {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.servicios-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: inherit;
+}
+
+.servicios-logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border: 1px solid var(--serv-vino);
+  border-radius: 4px;
+  background: var(--serv-blanco);
+}
+
+.servicios-logo-name {
+  font-size: 11px;
+  color: var(--serv-vino);
+}
+
+.servicios-tabs {
+  display: flex;
+  gap: 1rem;
+}
+
+.servicios-tab {
+  font-size: 13px;
+  color: var(--serv-texto);
+  white-space: nowrap;
+}
+
+.servicios-tab:hover {
+  color: var(--serv-vino);
+}
+
+.servicios-tab-active {
+  font-weight: 800;
+}
+
+.header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-icon {
+  width: 26px;
+  height: 26px;
+  color: var(--serv-vino);
+}
+
+.servicios-login-btn {
+  padding: 6px 16px;
+  border: 1px solid var(--serv-vino);
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--serv-vino);
+  background: var(--serv-blanco);
+  white-space: nowrap;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.servicios-login-btn:hover {
+  background: var(--serv-vino);
+  color: var(--serv-blanco);
+  transform: scale(1.05);
+}
+
+/* ---------- Contenido: formulario centrado ---------- */
+
+.layout-servicios {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem 1rem;
+}
+
+.contenedor-formulario {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.caja-inputs {
+  width: 100%;
+  border: 2px solid var(--serv-vino);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  background-color: var(--serv-blanco);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.campo-etiqueta {
+  color: var(--serv-vino);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding-left: 0.5rem;
+}
+
+.caja-inputs input,
+.caja-inputs select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid rgba(73, 41, 34, 0.3);
+  border-radius: 20px;
+  background-color: var(--serv-blanco);
+  font-family: "Nunito", sans-serif;
+  font-size: 0.95rem;
+  color: var(--serv-texto);
+  outline: none;
+  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.caja-inputs input:focus,
+.caja-inputs select:focus {
+  border-color: var(--serv-naranja);
+  box-shadow: 0 0 0 3px rgba(250, 154, 81, 0.3);
+}
+
+/* ---------- Botón registrar ---------- */
+
+.btn-registrar {
+  background-color: var(--serv-vino);
+  color: var(--serv-blanco);
+  font-family: "Nunito", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.75rem 2.5rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-registrar:hover {
+  background: linear-gradient(135deg, #442623, var(--serv-rojo));
+  transform: scale(1.05);
+}
+
+.btn-registrar:active {
+  transform: scale(0.95);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 768px) {
+  .servicios-navbar {
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .header-right {
+    margin-left: 0;
+  }
+}
+
+/* ---------- Aviso flotante (mensajes flash) ---------- */
+
+.aviso {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  min-width: 260px;
+  max-width: 90vw;
+  background-color: var(--serv-blanco);
+  border: 2px solid var(--serv-vino);
+  border-radius: 16px;
+  padding: 1rem 2.5rem 1rem 1.25rem;
+  box-shadow: 0 8px 20px rgba(73, 41, 34, 0.2);
+  animation: aviso-entrada 0.3s ease;
+}
+
+.aviso p {
+  color: var(--serv-vino);
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.aviso-cerrar {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--serv-vino);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.aviso-cerrar:hover {
+  color: var(--serv-rojo);
+}
+
+@keyframes aviso-entrada {
+  from { opacity: 0; transform: translate(-50%, -10px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* "@nombre" cuando hay sesión iniciada */
+.servicios-usuario {
+  padding: 6px 14px;
+  border: 1px solid var(--serv-vino);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: var(--serv-vino);
+  background: var(--serv-blanco);
+  white-space: nowrap;
+}

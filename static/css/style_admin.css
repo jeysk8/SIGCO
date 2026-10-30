@@ -1,0 +1,42 @@
+:root {
+  --adm-vino: rgb(73, 41, 34);      /* #492922 */
+  --adm-vino-oscuro: #3a1f1a;
+  --adm-rojo: #A52727;
+  --adm-rosa: rgb(255, 213, 206);
+  --adm-naranja: rgb(250, 154, 81);
+}
+
+.adm-titulo {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.adm-titulo h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 800;
+  color: var(--adm-vino);
+}
+
+/* Tarjetas oscuras, para que se distinga de un vistazo del menú de usuario */
+.adm-card {
+  background-color: var(--adm-vino);
+  border-top: 4px solid var(--adm-naranja);
+}
+
+.adm-card .card-name {
+  color: var(--adm-rosa);
+  font-weight: 700;
+}
+
+.adm-card .card-icon {
+  background-color: rgba(250, 154, 81, 0.22);
+}
+
+.adm-card:hover {
+  background-color: var(--adm-vino-oscuro);
+}
+
+.adm-card:focus-visible {
+  outline: 3px solid var(--adm-naranja);
+}

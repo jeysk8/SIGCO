@@ -1,0 +1,71 @@
+<div class="modal fade modal-vino" id="modalRegistrarvis" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" method="POST" action="{{ url_for('visitante.consulta_visit') }}">
+            <input type="hidden" name="accion" value="registrar">
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar visitante</h5>
+            </div>
+            <div class="modal-body">
+
+                <label class="mb-1">Nombre</label>
+                <input class="form-control mb-2" name="nombre" maxlength="60" required>
+
+                <label class="mb-1">Apellido</label>
+                <input class="form-control mb-2" name="apellido" maxlength="60" required>
+
+                <label class="mb-1">Fecha de nacimiento</label>
+                <input class="form-control mb-2" type="date" name="fecha_nac" required>
+
+                <label class="mb-1">Género</label>
+                <select class="form-control mb-2" name="genero" required>
+                    <option value="" disabled selected>Selecciona el género</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                </select>
+
+                <label class="mb-1">Tipo de documento</label>
+                <select class="form-control mb-2" name="tipodoc" required>
+                    <option value="" disabled selected>Selecciona el tipo</option>
+                    <option value="CC">CC</option>
+                    <option value="TI">TI</option>
+                    <option value="CE">CE</option>
+                    <option value="PP">PP</option>
+                </select>
+
+                <label class="mb-1">Número de documento</label>
+                <input class="form-control mb-2" type="number" name="documento" min="1" required>
+
+                <label class="mb-1">Tipo de vehículo (opcional)</label>
+                <select class="form-control mb-2" name="tipo_vehiculo">
+                    <option value="" selected>Sin vehículo</option>
+                    <option value="Carro">Carro</option>
+                    <option value="Moto">Moto</option>
+                    <option value="Bicicleta">Bicicleta</option>
+                </select>
+
+                <label class="mb-1">Placa (opcional)</label>
+                <input class="form-control mb-2" name="placa" maxlength="6"
+                       placeholder="Ej: ABC123" style="text-transform:uppercase">
+
+                <label class="mb-1">Residente que visita</label>
+                <select class="form-control mb-2" name="idusu" required>
+                    <option value="" disabled selected>Selecciona el residente</option>
+                    {% for u in usuarios %}
+                        <option value="{{ u[0] }}">{{ u[1] }}</option>
+                    {% endfor %}
+                </select>
+
+                <label class="mb-1">Estado</label>
+                <select class="form-control mb-2" name="activo" required>
+                    <option value="true" selected>Activo</option>
+                    <option value="false">Inactivo</option>
+                </select>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-vino-sec" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn-vino">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>

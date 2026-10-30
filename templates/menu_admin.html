@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú admin — SIGCO</title>
+    <link rel="icon" href="../static/icono_1.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_menu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_admin.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="seccion-blanca">
+
+{% set tipo_navbar = 'admin' %}
+{% include 'components/navbar.html' %}
+<main class="cards-section adm-section">
+    <div class="adm-titulo">
+        <center>
+            <h1>Panel de administración</h1>
+        </center>
+    </div>
+
+    <div class="cards-grid">
+        <a class="portal-card adm-card" href="{{url_for('pages.crud_elegir')}}">
+            <span class="card-icon">🧮</span>
+            <span class="card-name vino">Gestion de tablas</span>
+        </a>
+
+        </a>
+
+        <a class="portal-card adm-card" href="#">
+            <span class="card-icon">⚙️​</span>
+            <span class="card-name vino">Configuración</span>
+        </a>
+        
+        <a class="portal-card adm-card" href="#">
+            <span class="card-icon">📥</span>
+            <span class="card-name vino">Solicitudes</span>
+        </a>
+
+        <a class="portal-card adm-card" href="{{url_for('pago.admin_pagos')}}">
+            <span class="card-icon">​​💱</span>
+            <span class="card-name vino">Control De Pagos</span>
+        </a>
+
+        <a class="portal-card adm-card" href="{{url_for('reserva.consultar_reserva')}}">
+            <span class="card-icon">📌​</span>
+            <span class="card-name vino">Reservas de zonas</span>
+        </a>
+
+       <a class="portal-card adm-card" href="#">
+            <span class="card-icon">🔔</span>
+            <span class="card-name vino">Gestión De Notificaciones</span>
+        </a>
+
+        <a class="portal-card adm-card" href="#">
+            <span class="card-icon">📢</span>
+            <span class="card-name vino">Publicar comunicados</span>
+        </a>
+
+       <a class="portal-card adm-card" href="{{ url_for('propiedad.consultar_propiedad') }}">
+            <span class="card-icon">🏢</span>
+            <span class="card-name vino">Listado de Torres</span>
+        </a>
+
+    </div>
+</main>
+
+<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+
+</body>
+</html>

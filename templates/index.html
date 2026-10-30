@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conjunto Residencial Puerto Gaita</title>
+    <link rel="icon" href="{{ url_for('static', filename='icono_1.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_menu.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+{% set tipo_navbar = 'inicio' %}
+{% include 'components/navbar.html' %}
+
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-texto">
+                <p class="hero-eyebrow">Conjunto Residencial</p>
+                <h1>Bienvenido a Puerto Gaita</h1>
+                <p class="hero-sub">Gestioná visitas, trámites y la vida en comunidad desde un solo lugar.</p>
+            </div>
+            <div class="hero-imagen">
+                <img src="{{ url_for('static', filename='ptogaita.webp') }}" alt="Vista del conjunto residencial Puerto Gaita">
+            </div>
+        </div>
+
+        <svg class="ola" viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,40 C 240,100 480,0 720,40 C 960,80 1200,20 1440,50 L1440,100 L0,100 Z" fill="#FFFFFF"></path>
+        </svg>
+    </section>
+
+    <section class="accesos">
+        <div class="accesos-inner">
+            <h2 class="accesos-titulo">¿Qué estás buscando?</h2>
+
+            <div class="tarjetas">
+                <form action="{{ url_for('pages.menu_usuario') }}" class="tarjeta tarjeta-visitas">
+                    <span class="tarjeta-icono"><i class="fa-solid fa-table-cells-large"></i></span>
+                    <h3>Menú de opciones</h3>
+                    <p>Pagos, visitas, servicios y trámites del conjunto en un solo lugar.</p>
+                    <button type="submit" class="tarjeta-btn">Ir al menú de opciones</button>
+                </form>
+
+                <form action="{{ url_for('pages.comunidad') }}" class="tarjeta tarjeta-comunidad">
+                    <span class="tarjeta-icono"><i class="fa-solid fa-people-roof"></i></span>
+                    <h3>Comunidad</h3>
+                    <p>Enterate de novedades y avisos del conjunto.</p>
+                    <button type="submit" class="tarjeta-btn">Ir a Comunidad</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="pie">
+        <p>© 2026 SIGCO</p>
+        <ul class="pie-links">
+            <li><a href="{{ url_for('pages.acerca') }}">Acerca de nosotros</a></li>
+            <li><a href="{{ url_for('pages.contact') }}">Contactos</a></li>
+        </ul>
+    </footer>
+
+    {% if autenticado %}
+    <script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+    {% endif %}
+
+</body>
+</html>

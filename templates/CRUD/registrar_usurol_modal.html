@@ -1,0 +1,41 @@
+<div id="datos-asignados" data-asignados='{{ asignados | tojson }}' hidden></div>
+
+<div class="modal fade modal-vino" id="modalRegistrarusur" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" method="POST" action="{{ url_for('usuario_rol.consultar_usuario_rol') }}">
+            <input type="hidden" name="accion" value="registrar">
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar rol a usuario</h5>
+            </div>
+            <div class="modal-body">
+
+                <label class="mb-1">Usuario</label>
+                <select class="form-control mb-2" name="idu" id="selUsuario" required>
+                    <option value="" disabled selected>Selecciona el usuario</option>
+                    {% for u in usuarios %}
+                        <option value="{{ u[0] }}">{{ u[1] }}</option>
+                    {% endfor %}
+                </select>
+
+                <label class="mb-1">Rol</label>
+                <select class="form-control mb-2" name="idrol1" id="selRol" required>
+                    <option value="" disabled selected>Selecciona el rol</option>
+                    {% for r in roles %}
+                        <option value="{{ r[0] }}">{{ r[1] }}</option>
+                    {% endfor %}
+                </select>
+
+                <label class="mb-1">Estado</label>
+                <select class="form-control mb-2" name="activo" required>
+                    <option value="true" selected>Activo</option>
+                    <option value="false">Inactivo</option>
+                </select>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-vino-sec" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn-vino">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>

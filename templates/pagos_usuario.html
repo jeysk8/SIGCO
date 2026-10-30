@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos y abonos</title>
+    <link rel="icon" href="../static/icono_1.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style_pagosus.css', v='5') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_menu.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="seccion-blanca">
+    {% set tipo_navbar = 'usuario' %}
+    {% include 'components/navbar.html' %}
+
+        <main class="main-container pagos-usuario">
+
+            {% if not cuotas %}
+                <div class="alerta error">No tienes cuotas pendientes. Cuando la administración genere la cuota del mes, aparecerá aquí.</div>
+            {% endif %}
+        <section class="form-card">
+            
+            <div class="form-header">
+                <h1>Reportar Comprobante de Pago</h1>
+                <p>Complete los datos correspondientes y adjunte su recibo para la verificación de la administración.</p>
+                <div class="linea-decorativa"></div>
+            </div>
+
+            {% with msgs = get_flashed_messages(with_categories=true) %}
+                {% for cat, msg in msgs %}<div class="alerta {{ cat }}">{{ msg }}</div>{% endfor %}
+            {% endwith %}
+
+                    <form action="{{ url_for('pago.pagos_usuario') }}" method="POST" enctype="multipart/form-data" class="pagos-form"> 
+                <div class="form-group">
+                    <label for="idcuo">Cuota a pagar</label>
+                    <select id="idcuo" name="idcuo" required>
+                        <option value="" disabled selected>Seleccione la cuota</option>
+                        {% for c in cuotas %}
+                        <option value="{{ c[0] }}">Vence {{ c[1] }} · ${{ c[2] }} · {{ c[3] or 'pendiente' }}</option>
+                        {% endfor %}
+                    </select>
+                    </div>
+                    <div class="form-group">
+                    <label for="monto_pago">Monto a abonar</label>
+                    <input type="number" id="monto_pago" name="monto_pago" min="1" step="any" autocomplete="off" required>
+                </div>
+
+                <!-- Tipo de Pago -->
+                <div class="form-group">
+                    <label for="tipo_pago">Tipo de Pago</label>
+                    <select id="tipo_pago" name="tipo_pago" required>
+                        <option value="" disabled selected>Seleccione el tipo de pago</option>
+                        <option value="administracion">Cuota de Administración</option>
+                        <option value="multa">Multa o Sanción</option>
+                        <option value="zona_comun">Alquiler de Zonas Comunes</option>
+                        <option value="extraordinaria">Cuota Extraordinaria</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <!-- Cuadro de Arrastrar y Soltar (Drag & Drop) para el archivo PDF / Recibo -->
+                <div class="form-group">
+                    <label>Comprobante de Pago (Recibo)</label>
+                    <div class="drop-zone" id="dropZone">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <p class="drop-text">Arrastra y suelta tu archivo aquí o <span>haz clic para buscar</span></p>
+                        <p class="drop-subtext">Formatos permitidos: PDF, JPG, PNG (Máx. 5MB)</p>
+                        <input type="file" id="comprobante" name="comprobante" accept=".pdf, .jpg, .jpeg, .png" class="file-input" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Confirma tu contraseña para pagar</label>
+                    <input type="password" id="password" name="password" autocomplete="current-password" required>
+                </div>
+
+                <!-- Botón de Envío -->
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">Enviar Comprobante</button>
+                </div>
+
+            </form>
+        </section>
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="pie">
+        <p>&copy; 2026 SIGCO - Módulo de Usuarios</p>
+        <ul class="pie-links">
+            <li><a href="{{ url_for('pages.acerca') }}">Acerca de nosotros</a></li>
+            <li><a href="{{ url_for('pages.contact') }}">Contactanos</a></li>
+        </ul>
+    </footer>
+
+    <!-- SCRIPT DE INTERACTIVIDAD -->
+<script>
+    // Drag & Drop interactivo
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('comprobante');
+
+    if (dropZone && fileInput) {
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) {
+                fileInput.files = e.dataTransfer.files;
+                const fileName = e.dataTransfer.files[0].name;
+                dropZone.querySelector('.drop-text').innerHTML = `Archivo seleccionado: <strong>${fileName}</strong>`;
+            }
+        });
+
+        fileInput.addEventListener('change', function() {
+            if (fileInput.files.length > 0) {
+                const fileName = fileInput.files[0].name;
+                dropZone.querySelector('.drop-text').innerHTML = `Archivo seleccionado: <strong>${fileName}</strong>`;
+            }
+        });
+    }
+</script>
+<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+</body>
+</html>

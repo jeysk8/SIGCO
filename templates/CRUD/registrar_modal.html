@@ -1,0 +1,59 @@
+<div class="modal fade modal-vino" id="modalRegistrar" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" method="POST" action="{{ url_for('usuario.consulta_usuario') }}">
+            <input type="hidden" name="accion" value="registrar">
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar usuario</h5>
+            </div>
+            <div class="modal-body">
+
+                <label class="mb-1">Nombre</label>
+                <input class="form-control mb-2" name="nombre" required>
+
+                <label class="mb-1">Apellido</label>
+                <input class="form-control mb-2" name="apellido" required>
+
+                <label class="mb-1">Fecha de nacimiento</label>
+                <input class="form-control mb-2" type="date" name="fecha_nac" required>
+
+                <label class="mb-1">Género</label>
+                <select class="form-control mb-2" name="genero" required>
+                    <option value="" disabled selected>Selecciona el género</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                </select>
+
+                <label class="mb-1">Tipo de documento</label>
+                <input class="form-control mb-2" name="tipo_documento" required>
+
+                <label class="mb-1">Número de documento</label>
+                <input class="form-control mb-2" name="documento" required>
+
+                <label class="mb-1">Correo</label>
+                <input class="form-control mb-2" type="email" name="correo" required>
+
+                <label class="mb-1">Contraseña</label>
+                <input class="form-control mb-2" type="password" name="contrasena" required>
+
+                <label class="mb-1">Estado</label>
+                <select class="form-control mb-2" name="activo" required>
+                    <option value="true" selected>Activo</option>
+                    <option value="false">Inactivo</option>
+                </select>
+
+                <label class="mb-1">Propiedad</label>
+                <select class="form-control mb-2" name="idp">
+                    <option value="" disabled selected>Selecciona la propiedad</option>
+                    {% for p in propiedades %}
+                        <option value="{{ p[0] }}">{{ p[1] }}</option>
+                    {% endfor %}
+                </select>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-vino-sec" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn-vino">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>

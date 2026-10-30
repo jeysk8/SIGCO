@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegir menú — SIGCO</title>
+    <link rel="icon" href="../static/icono_1.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_elegir.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="eleg-page">
+
+<header class="eleg-header">
+    <img class="eleg-logo-img" src="{{ url_for('static', filename='icono_1.png') }}" alt="Logo SIGCO">
+    <span class="eleg-logo-name">SIGCO</span>
+</header>
+
+<main class="eleg-main">
+    <div class="eleg-caja">
+        <h1>Hola, @{{ nombre_usuario or 'usuario' }}</h1>
+        <p>Tienes acceso de administrador. ¿Qué menú quieres ver?</p>
+
+        <div class="eleg-opciones">
+            <a class="eleg-card" href="{{ url_for('auth.cambiar_vista', vista='admin') }}">
+                <span class="eleg-card-icono">🛠️</span>
+                <span class="eleg-card-nombre">Menú admin</span>
+                <span class="eleg-card-detalle">Administrar el conjunto</span>
+            </a>
+
+            <a class="eleg-card" href="{{ url_for('auth.cambiar_vista', vista='usuario', next=siguiente) }}">
+                <span class="eleg-card-icono">🏠</span>
+                <span class="eleg-card-nombre">Menú usuario</span>
+                <span class="eleg-card-detalle">{% if siguiente %}Volver a donde estabas{% else %}Lo que ve un residente{% endif %}</span>
+            </a>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

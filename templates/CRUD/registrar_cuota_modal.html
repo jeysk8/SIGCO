@@ -1,0 +1,47 @@
+<div class="modal fade modal-vino" id="modalRegistrarcuo" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" method="POST" action="{{ url_for('cuota.consultar_cuota') }}">
+            <input type="hidden" name="accion" value="registrar">
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar cuota</h5>
+            </div>
+            <div class="modal-body">
+
+                <label class="mb-1">Propiedad</label>
+                <select class="form-control mb-2" name="idpro" required>
+                    <option value="" disabled selected>Selecciona la propiedad</option>
+                    {% for p in propiedades %}
+                        <option value="{{ p[0] }}">{{ p[1] }}</option>
+                    {% endfor %}
+                </select>
+
+                <label class="mb-1">Fecha de generación</label>
+                <input class="form-control mb-2" type="date" name="fecha_gen" required>
+
+                <label class="mb-1">Fecha límite de pago</label>
+                <input class="form-control mb-2" type="date" name="fecha_lim" required>
+
+                <label class="mb-1">Monto</label>
+                <input class="form-control mb-2" type="number" name="monto" min="0" step="0.01" required>
+
+                <label class="mb-1">Estado de la cuota</label>
+                <select class="form-control mb-2" name="estado" required>
+                    <option value="pendiente" selected>Pendiente</option>
+                    <option value="pagada">Pagada</option>
+                    <option value="vencida">Vencida</option>
+                </select>
+
+                <label class="mb-1">Activo</label>
+                <select class="form-control mb-2" name="activo" required>
+                    <option value="true" selected>Activo</option>
+                    <option value="false">Inactivo</option>
+                </select>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-vino-sec" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn-vino">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>

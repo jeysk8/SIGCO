@@ -1,0 +1,67 @@
+<div class="modal fade modal-vino" id="modalActualizarpag{{ fila[0] }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" method="POST" action="{{ url_for('pago_crud.consultar_pago') }}">
+            <input type="hidden" name="accion" value="actualizar">
+            <input type="hidden" name="idpago" value="{{ fila[0] }}">
+            <div class="modal-header">
+                <h5 class="modal-title">Actualizar pago {{ fila[0] }}</h5>
+            </div>
+            <div class="modal-body">
+
+                <label class="mb-1">Cuota</label>
+                <select class="form-control mb-2" name="idcuo1" required>
+                    {% for c in cuotas %}
+                        <option value="{{ c[0] }}" {% if c[0] == fila[2] %}selected{% endif %}>{{ c[1] }}</option>
+                    {% endfor %}
+                </select>
+
+                <label class="mb-1">Usuario que paga</label>
+                <select class="form-control mb-2" name="idusuario" required>
+                    {% for u in usuarios %}
+                        <option value="{{ u[0] }}" {% if u[0] == fila[11] %}selected{% endif %}>{{ u[1] }}</option>
+                    {% endfor %}
+                </select>
+
+                <label class="mb-1">Fecha de pago</label>
+                <input class="form-control mb-2" type="date" name="fecha_pago" value="{{ fila[3] or '' }}" required>
+
+                <label class="mb-1">Monto pagado</label>
+                <input class="form-control mb-2" type="number" name="monto_pago" min="0" step="0.01" value="{{ fila[4] }}" required>
+
+                <label class="mb-1">Método de pago</label>
+                <select class="form-control mb-2" name="metodo" required>
+                    {% for m in ['Efectivo', 'Transferencia', 'PSE', 'Tarjeta'] %}
+                        <option value="{{ m }}" {% if fila[5] == m %}selected{% endif %}>{{ m }}</option>
+                    {% endfor %}
+                </select>
+
+                <label class="mb-1">Referencia (opcional)</label>
+                <input class="form-control mb-2" name="referencia" maxlength="100" value="{{ fila[6] or '' }}">
+
+                <label class="mb-1">URL del comprobante (opcional)</label>
+                <input class="form-control mb-2" name="comprobante_url" maxlength="255" value="{{ fila[7] or '' }}">
+
+                <label class="mb-1">Estado de validación</label>
+                <select class="form-control mb-2" name="estado_validacion" required>
+                    <option value="pendiente" {% if fila[8] == 'pendiente' %}selected{% endif %}>Pendiente</option>
+                    <option value="aprobado"  {% if fila[8] == 'aprobado' %}selected{% endif %}>Aprobado</option>
+                    <option value="rechazado" {% if fila[8] == 'rechazado' %}selected{% endif %}>Rechazado</option>
+                </select>
+
+                <label class="mb-1">Observación del administrador (opcional)</label>
+                <textarea class="form-control mb-2" name="observacion_admin" rows="2">{{ fila[9] or '' }}</textarea>
+
+                <label class="mb-1">Activo</label>
+                <select class="form-control mb-2" name="activo" required>
+                    <option value="true"  {% if fila[12] %}selected{% endif %}>Activo</option>
+                    <option value="false" {% if not fila[12] %}selected{% endif %}>Inactivo</option>
+                </select>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-vino-sec" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn-vino">Guardar cambios</button>
+            </div>
+        </form>
+    </div>
+</div>

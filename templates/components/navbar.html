@@ -1,0 +1,114 @@
+{% if tipo_navbar == 'inicio' %}
+        <header class="header-menu menu-header">
+        <div class="navbar-menu menu-navbar">
+
+            <a class="menu-logo" href="{{ url_for('pages.sigco') }}">
+                <img class="menu-logo-img" src="{{ url_for('static', filename='icono_1.png') }}" alt="Logo SIGCO">
+                <span class="menu-logo-name">SIGCO</span>
+            </a>
+            <nav class="menu-tabs">
+                <a href="{{ url_for('pages.sigco') }}" class="menu-tab menu-tab-active">Inicio</a>
+                <a href="{{ url_for('pages.acerca') }}" class="menu-tab">Acerca de nosotros</a>
+                <a href="{{ url_for('pages.contact') }}" class="menu-tab">Contactanos</a>
+            </nav>
+
+            <div class="buttons">
+                {% if autenticado %}
+                <div class="idx-sesion">
+                    <span class="idx-usuario">@{{ nombre_usuario or 'Usuario' }}</span>
+
+                    <button class="idx-icon-btn" type="button" aria-label="Notificaciones">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                        <span class="idx-notif-dot"></span>
+                    </button>
+
+                    {% if es_admin %}
+                    <div class="idx-wrap">
+                        <button class="idx-icon-btn" type="button" id="vista-btn" aria-haspopup="true" aria-expanded="false" aria-label="Cambiar de menú" title="Cambiar de menú">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                        </button>
+                        <div class="idx-dropdown" id="vista-dropdown">
+                            <a href="{{ url_for('auth.cambiar_vista', vista='admin') }}"{% if vista_actual == 'admin' %} class="activo" aria-current="true"{% endif %}>Menú admin</a>
+                            <a href="{{ url_for('auth.cambiar_vista', vista='usuario') }}"{% if vista_actual != 'admin' %} class="activo" aria-current="true"{% endif %}>Menú usuario</a>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="idx-wrap">
+                        <button class="idx-icon-btn" type="button" id="settings-btn" aria-haspopup="true" aria-expanded="false" aria-label="Configuración">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </button>
+                        <div class="idx-dropdown" id="settings-dropdown">
+                            <a href="{{ url_for('auth.logout') }}">Cerrar sesión</a>
+                            <a href="#">Editar cuenta</a>
+                            <a href="#">Ayuda</a>
+                            <a href="#">Otras opciones</a>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <a href="{{ url_for('auth.login') }}" class="action_btn">Iniciar sesión</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+{% else %}
+    <header class="header-menu menu-header">
+    <div class="navbar-menu menu-navbar">
+
+        <a class="menu-logo" href="{{ url_for('pages.sigco') }}">
+            <img class="menu-logo-img" src="{{ url_for('static', filename='icono_1.png') }}" alt="Logo SIGCO">
+            <span class="menu-logo-name">SIGCO</span>
+        </a>
+
+        <nav class="menu-tabs">
+            <a href="{{ url_for('pages.sigco') }}" class="menu-tab menu-tab-active">Inicio</a>
+            <a href="{{ url_for('pages.acerca') }}" class="menu-tab">Acerca de nosotros</a>
+            <a href="{{ url_for('pages.contact') }}" class="menu-tab">Contactanos</a>
+        </nav>
+
+        <div class="header-right">
+            <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+
+            {% if autenticado %}
+            <span class="menu-usuario">@{{ nombre_usuario or 'Usuario' }}</span>
+            {% else %}
+            <a href="{{ url_for('auth.login', next=request.path) }}" class="menu-login-btn">Iniciar Sesión</a>
+            {% endif %}
+
+            <button class="icon-btn" type="button" aria-label="Notificaciones">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                <span class="notif-dot"></span>
+            </button>
+
+            {% if es_admin %}
+            <div class="settings-wrapper">
+                <button class="icon-btn" type="button" id="vista-btn" aria-haspopup="true" aria-expanded="false" aria-label="Cambiar de menú" title="Cambiar de menú">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                </button>
+
+                <div class="settings-dropdown" id="vista-dropdown">
+                    <a href="{{ url_for('auth.cambiar_vista', vista='admin') }}"{% if vista_actual == 'admin' %} class="activo" aria-current="true"{% endif %}>Menú admin</a>
+                    <a href="{{ url_for('auth.cambiar_vista', vista='usuario') }}"{% if vista_actual != 'admin' %} class="activo" aria-current="true"{% endif %}>Menú usuario</a>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="settings-wrapper">
+                <button class="icon-btn" type="button" id="settings-btn" aria-haspopup="true" aria-expanded="false" aria-label="Configuración">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                </button>
+
+                <div class="settings-dropdown" id="settings-dropdown">
+                    {% if autenticado %}
+                    <a href="{{ url_for('auth.logout') }}">Cerrar sesión</a>
+                    {% endif %}
+                    <a href="#">Editar cuenta</a>
+                    <a href="#">Ayuda</a>
+                    <a href="#">Otras opciones</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endif %}

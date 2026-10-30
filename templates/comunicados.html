@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conjunto Residencial</title>
+    <link rel="icon" href="../static/icono_1.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_comunicados.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_menu.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="seccion-blanca">
+{% set tipo_navbar = 'inicio' %}
+{% include 'components/navbar.html' %}
+
+<main class="contacto-container">
+        
+        <div class="contacto-header">
+            <span class="contacto-eyebrow">Tablero Oficial</span>
+            <h1>Comunicados y Avisos</h1>
+            <p>Mantente al tanto de las últimas novedades, restricciones de zonas comunes, mantenimientos y avisos importantes de la administración.</p>
+        </div>
+
+        <!-- CONDICIONAL: Si hay comunicados los muestra, sino muestra el mensaje de vacío -->
+        {% if comunicados and comunicados|length > 0 %}
+            <div class="contacto-grid">
+                {% for c in comunicados %}
+                <div class="contacto-card">
+                    <div class="contacto-icon">
+                        <i class="{{ c.icono }}"></i>
+                    </div>
+                    <h3>{{ c.titulo }}</h3>
+                    <p>{{ c.descripcion }}</p>
+                    <div class="contacto-info">
+                        <div class="info-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>{{ c.fecha }}</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-tag"></i>
+                            <span>{{ c.tipo }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <!-- Estado Vacío (Cuando no hay avisos) -->
+            <div class="comunicado-vacio-card">
+                <div class="vacio-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <h3>En estos momentos no tenemos comunicados</h3>
+                <p>Te invitamos a consultar más tarde. Cualquier novedad importante de la administración aparecerá reflejada en este espacio.</p>
+            </div>
+        {% endif %}
+
+    </main>
+</body>
+</html>

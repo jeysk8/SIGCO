@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitantes | SIGCO</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_menu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_vigilante.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_consulta.css') }}">
+</head>
+
+<body class="seccion-blanca">
+
+{% set tipo_navbar = 'vigilante' %}
+{% include 'components/navbar.html' %}
+
+
+<main class="container">
+    <h1 class="title">Visitantes activos</h1>
+
+    <input type="search"
+           id="buscador"
+           class="buscador-tabla"
+           placeholder="Buscar visitante..."
+           autocomplete="off">
+
+    <table class="tabla">
+        <thead>
+            <tr>
+                <th>Identificación</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Documento</th>
+                <th>Vehículo</th>
+                <th>Placa</th>
+                <th>Residente</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for fila in visitantes %}
+            <tr>
+                <td>{{ fila[0] }}</td>
+                <td>{{ fila[1] }}</td>
+                <td>{{ fila[2] }}</td>
+                <td>{{ fila[5] }} {{ fila[6] }}</td>
+                <td>{{ fila[8] or 'Sin vehículo' }}</td>
+                <td>{{ fila[7] or 'No aplica' }}</td>
+                <td>{{ fila[10] }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="7">No hay visitantes activos registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+
+<script src="{{ url_for('static', filename='js/buscador.js') }}"></script>
+
+</body>
+</html>

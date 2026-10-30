@@ -1,0 +1,115 @@
+.caja {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFD9CD;
+  padding: 2rem 1.5rem;
+}
+
+.container-form {
+  display: flex;
+  width: 100%;
+  max-width: 880px;
+  min-height: 500px;
+  background-color: #fff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(73, 41, 34, 0.18);
+}
+
+.information {
+  flex: 1;
+  background: linear-gradient(160deg, #492922, #6b3f34);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+}
+
+.info-childs {
+  text-align: center;
+}
+
+.info-childs h1 {
+  color: #FFD9CD;
+  font-size: 2.1rem;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.info-childs p {
+  color: #fff;
+  font-size: 1rem;
+  opacity: 0.9;
+  max-width: 26ch;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.form-information {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 2.5rem;
+}
+
+.form-information .form {
+  margin-top: 0.5rem;
+}
+
+.form-information label svg {
+  flex-shrink: 0;
+  margin-right: 8px;
+}
+
+.form-information input[type="submit"] {
+  background-color: #492922;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  height: 50px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 10px;
+  box-shadow: 0 5px 7px rgba(0, 0, 0, .1);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.form-information input[type="submit"]:hover {
+  background-color: #A52727;
+  transform: scale(1.02);
+}
+
+.flash-messages {
+  background-color: #FBE4E1;
+  border: 1px solid #A52727;
+  color: #A52727;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.9rem;
+  list-style: none;
+}
+
+.flash-messages li + li {
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .container-form {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .information {
+    padding: 2.5rem 2rem;
+  }
+
+  .form-information {
+    padding: 2.5rem 1.75rem;
+  }
+}

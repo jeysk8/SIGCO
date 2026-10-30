@@ -1,0 +1,28 @@
+<div class="modal fade modal-vino" id="modalActualizarrol{{ fila[0] }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" method="POST" action="{{ url_for('rol.consultar_rol') }}">
+            <input type="hidden" name="accion" value="actualizar">
+            <input type="hidden" name="idrol" value="{{ fila[0] }}">
+            <div class="modal-header">
+                <h5 class="modal-title">Actualizar rol {{ fila[0] }}</h5>
+            </div>
+            <div class="modal-body">
+
+                <label class="mb-1">Nombre del rol</label>
+                <input class="form-control mb-2" name="tipo_rol" maxlength="40"
+                       value="{{ fila[1] }}" required>
+
+                <label class="mb-1">Estado</label>
+                <select class="form-control mb-2" name="activo" required>
+                    <option value="true"  {% if fila[2] %}selected{% endif %}>Activo</option>
+                    <option value="false" {% if not fila[2] %}selected{% endif %}>Inactivo</option>
+                </select>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-vino-sec" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn-vino">Guardar cambios</button>
+            </div>
+        </form>
+    </div>
+</div>

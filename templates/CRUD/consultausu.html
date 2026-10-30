@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Usuarios</title>
+    <link rel="icon" href="../static/icono_1.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_menu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_consulta.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body class="seccion-blanca">
+
+{% set tipo_navbar = 'admin' %}
+{% include 'components/navbar.html' %}
+
+    <div class="container">
+    {% with mensajes = get_flashed_messages() %}
+    {% if mensajes %}
+        <div class="toast-contenedor">
+            {% for m in mensajes %}
+                <div class="toast-msg {% if 'Error' in m %}toast-error{% endif %}">{{ m }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+
+        <input type="search" id="buscador" class="buscador-tabla"
+           placeholder="Buscar en la tabla..." autocomplete="off">
+
+
+        
+        <h1 class="title"> Lista de usuarios</h1>
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Fecha de nacimiento</th>
+                    <th>Género</th>
+                    <th>Tipo de documento</th>
+                    <th>Número de documento</th>
+                    <th>Correo</th>
+                    <th>Estado</th>
+                    <th>Propiedad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in datos %}
+                <tr {% if not usuario[9] %}style="opacity:.5"{% endif %}>
+                    <td>{{ usuario[0] }}</td>
+                    <td>{{ usuario[1] }}</td>
+                    <td>{{ usuario[2] }}</td>
+                    <td>{{ usuario[3] }}</td>
+                    <td>{{ 'Masculino' if usuario[4] == 'M' else 'Femenino' }}</td>
+                    <td>{{ usuario[5] }}</td>
+                    <td>{{ usuario[6] }}</td>
+                    <td>{{ usuario[7] }}</td>
+                    <td>{{ 'Activo' if usuario[9] else 'Inactivo' }}</td>
+                    <td>{{ usuario[11] or 'Sin propiedad' }}</td>
+                    <td>
+                     <button type="button" class="btn btn-primary btn-sm" 
+                        data-toggle="modal" data-target="#modalActualizar{{usuario[0]}}">
+                        Actualizar
+                     </button>
+                     <form method="POST" action="{{ url_for('usuario.consulta_usuario') }}"
+                        style="display:inline"
+                        onsubmit="return confirm('Desactivar este usuario?');">
+                        <input type="hidden" name="accion" value="eliminar">
+                        <input type="hidden" name="id" value="{{ usuario[0] }}">
+                        <button type="submit" class="btn btn-danger btn-sm">Desactivar</button>
+                    </form>   
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="acciones-tabla">
+            <button type="button" class="btn-verde" data-toggle="modal" data-target="#modalRegistrar">
+                Registrar usuario
+            </button>
+            <a href="{{url_for('pages.crud_elegir')}}" class="btn-vino">Volver</a>
+            <a href="{{ url_for('admin.administracion')}}" class="btn-vino">Ir al menú</a>
+        </div>
+
+        {% for usuario in datos %}
+            {% include 'CRUD/editar.html' %}
+        {% endfor %}
+
+        {% include 'CRUD/registrar_modal.html' %}
+    </div>
+
+       <footer class="pie">
+        <p>© 2026 SIGCO</p>
+        <ul class="pie-links">
+            <li><a href="{{ url_for('pages.acerca') }}">Acerca de nosotros</a></li>
+            <li><a href="{{ url_for('pages.contact') }}">Contactos</a></li>
+        </ul>
+    </footer>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="{{ url_for('static', filename='js/buscador.js') }}"></script>
+<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+
+</body>
+</html>

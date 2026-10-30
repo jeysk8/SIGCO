@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú vigilante | SIGCO</title>
+    <link rel="icon" href="{{ url_for('static', filename='icono_1.png') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_menu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_usuario.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_vigilante.css') }}">
+</head>
+<body class="vigilante-page seccion-blanca">
+
+{% set tipo_navbar = 'vigilante' %}
+{% include 'components/navbar.html' %}
+
+
+<main class="cards-section usr-section vigilante-section">
+    <div class="usr-titulo">
+        <h1>Panel de Vigilante</h1>
+        <p>Control de visitantes del conjunto residencial</p>
+    </div>
+
+    <div class="cards-grid vigilante-grid">
+        <a class="portal-card usr-card vigilante-card"
+           href="{{ url_for('visitante.vigilante_visitantes') }}">
+            <span class="card-icon">👮</span>
+            <span class="card-name vino">Visitantes</span>
+            <p>Consultar los visitantes activos</p>
+        </a>
+
+        <div class="portal-card usr-card vigilante-card tarjeta-deshabilitada" aria-disabled="true">
+            <span class="card-icon">🏢</span>
+            <span class="card-name vino">Propiedades</span>
+            <p>Próximamente</p>
+        </div>
+
+        <div class="portal-card usr-card vigilante-card tarjeta-deshabilitada" aria-disabled="true">
+            <span class="card-icon">🚗</span>
+            <span class="card-name vino">Vehículos</span>
+            <p>Próximamente</p>
+        </div>
+
+        <div class="portal-card usr-card vigilante-card tarjeta-deshabilitada" aria-disabled="true">
+            <span class="card-icon">📋</span>
+            <span class="card-name vino">Incidencias</span>
+            <p>Próximamente</p>
+        </div>
+    </div>
+</main>
+<footer class="pie">
+        <p>© 2026 SIGCO</p>
+        <ul class="pie-links">
+            <li><a href="{{ url_for('pages.acerca') }}">Acerca de nosotros</a></li>
+            <li><a href="{{ url_for('pages.contact') }}">Contactos</a></li>
+        </ul>
+    </footer>
+<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+
+</body>
+</html>

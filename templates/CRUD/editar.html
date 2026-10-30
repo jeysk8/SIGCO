@@ -1,0 +1,60 @@
+<div class="modal fade modal-vino" id="modalActualizar{{ usuario[0] }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" method="POST" action="{{ url_for('usuario.consulta_usuario') }}">
+            <input type="hidden" name="accion" value="actualizar">
+            <input type="hidden" name="id" value="{{ usuario[0] }}">
+            <div class="modal-header">
+                <h5 class="modal-title">Actualizar usuario {{ usuario[0] }}</h5>
+            </div>
+            <div class="modal-body">
+
+                <label class="mb-1">Nombre</label>
+                <input class="form-control mb-2" name="nombre" value="{{ usuario[1] }}" required>
+
+                <label class="mb-1">Apellido</label>
+                <input class="form-control mb-2" name="apellido" value="{{ usuario[2] }}" required>
+
+                <label class="mb-1">Fecha de nacimiento</label>
+                <input class="form-control mb-2" type="date" name="fecha_nac" value="{{ usuario[3] }}" required>
+
+                <label class="mb-1">Género</label>
+                <select class="form-control mb-2" name="genero" required>
+                    <option value="M" {% if usuario[4] == 'M' %}selected{% endif %}>Masculino</option>
+                    <option value="F" {% if usuario[4] == 'F' %}selected{% endif %}>Femenino</option>
+                </select>
+
+                <label class="mb-1">Tipo de documento</label>
+                <input class="form-control mb-2" name="tipo_documento" value="{{ usuario[5] }}" required>
+
+                <label class="mb-1">Número de documento</label>
+                <input class="form-control mb-2" name="documento" value="{{ usuario[6] }}" required>
+
+                <label class="mb-1">Correo</label>
+                <input class="form-control mb-2" type="email" name="correo" value="{{ usuario[7] }}" required>
+
+                <label class="mb-1">Contraseña</label>
+                <input class="form-control mb-2" type="password" name="contrasena"
+                       placeholder="Dejar vacío para no cambiarla">
+
+                <label class="mb-1">Estado</label>
+                <select class="form-control mb-2" name="activo" required>
+                    <option value="true"  {% if usuario[9] %}selected{% endif %}>Activo</option>
+                    <option value="false" {% if not usuario[9] %}selected{% endif %}>Inactivo</option>
+                </select>
+
+                <label class="mb-1">Propiedad</label>
+                <select class="form-control mb-2" name="idp">
+                    <option value="" {% if usuario[10] is none %}selected{% endif %}>Sin propiedad</option>
+                    {% for p in propiedades %}
+                        <option value="{{ p[0] }}" {% if p[0] == usuario[10] %}selected{% endif %}>{{ p[1] }}</option>
+                    {% endfor %}
+                </select>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-vino-sec" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn-vino">Guardar cambios</button>
+            </div>
+        </form>
+    </div>
+</div>

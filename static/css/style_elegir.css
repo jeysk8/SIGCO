@@ -1,0 +1,123 @@
+/* Página "¿Qué menú quieres ver?" — independiente: solo comparte los colores del principal */
+:root {
+  --eleg-vino: rgb(73, 41, 34);      /* #492922 */
+  --eleg-rojo: #A52727;
+  --eleg-rosa: rgb(255, 213, 206);
+  --eleg-blanco: #ffffff;
+  --eleg-texto: #1c1c20;
+  --eleg-naranja: rgb(250, 154, 81);
+}
+
+.eleg-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--eleg-rosa);
+  font-family: "Nunito", system-ui, sans-serif;
+  color: var(--eleg-texto);
+}
+
+.eleg-header {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.eleg-logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border: 1px solid var(--eleg-vino);
+  border-radius: 4px;
+  background: var(--eleg-blanco);
+}
+
+.eleg-logo-name {
+  font-weight: 800;
+  color: var(--eleg-vino);
+}
+
+.eleg-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.eleg-caja {
+  width: 100%;
+  max-width: 640px;
+  text-align: center;
+}
+
+.eleg-caja h1 {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.7rem, 5vw, 2.3rem);
+  font-weight: 800;
+  color: var(--eleg-vino);
+}
+
+.eleg-caja p {
+  margin: 0 0 2rem;
+  color: var(--eleg-vino);
+}
+
+.eleg-opciones {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.eleg-card {
+  background: var(--eleg-blanco);
+  border-radius: 18px;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.08);
+  padding: 2rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
+  color: var(--eleg-vino);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.eleg-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.14);
+}
+
+.eleg-card:focus-visible {
+  outline: 3px solid var(--eleg-naranja);
+  outline-offset: 3px;
+}
+
+.eleg-card-icono {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 193, 77, 0.25);
+  font-size: 1.8rem;
+}
+
+.eleg-card-nombre {
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.eleg-card-detalle {
+  font-size: 0.85rem;
+  color: var(--eleg-texto);
+}
+
+@media (max-width: 520px) {
+  .eleg-opciones { grid-template-columns: 1fr; }
+}

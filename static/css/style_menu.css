@@ -1,0 +1,229 @@
+/* ============================================
+   style_menu.css
+   Solo lo propio de la barra de "Menú" (rama else del navbar)
+   y de las tarjetas. La estructura compartida del navbar
+   (.navbar-menu, .menu-navbar, .menu-logo, .menu-tabs, .menu-tab)
+   vive únicamente en style.css para evitar conflictos.
+   ============================================ */
+
+:root {
+  --menu-vino: rgb(73, 41, 34);      /* #492922 */
+  --menu-rojo: #A52727;
+  --menu-rosado: rgb(255, 213, 206);
+  --menu-blanco: #ffffff;
+  --menu-texto: #1c1c20;
+}
+
+/* ---------- Header ---------- */
+.header-menu {
+  background-color: rgb(255, 213, 206);
+  border-bottom: 1px solid rgba(73, 41, 34, 0.12);
+}
+
+.navbar-menu .page-name {
+  font-size: 1.4rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.username {
+  font-size: 0.95rem;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: rgb(73, 41, 34);
+  transition: background 0.2s ease, transform 0.2s ease;
+  position: relative;
+}
+
+.icon-btn:hover {
+  background-color: rgba(73, 41, 34, 0.08);
+  transform: scale(1.05);
+}
+
+.icon-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.notif-dot {
+  position: absolute;
+  top: 6px;
+  right: 7px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgb(214, 63, 63);
+  border: 2px solid rgb(255, 213, 206);
+}
+
+/* ---------- Dropdown de configuración ---------- */
+.settings-wrapper {
+  position: relative;
+}
+
+.settings-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  min-width: 190px;
+  padding: 8px;
+  display: none;
+  flex-direction: column;
+  z-index: 200;
+}
+
+.settings-dropdown.open {
+  display: flex;
+}
+
+.settings-dropdown a {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.settings-dropdown a:hover {
+  background-color: rgba(73, 41, 34, 0.08);
+}
+
+/* Opción activa del desplegable "Cambiar de menú" */
+.settings-dropdown a.activo {
+  font-weight: 800;
+  background-color: rgba(73, 41, 34, 0.08);
+}
+
+.settings-dropdown a.activo::after {
+  content: " ✓";
+}
+
+/* ---------- Zona derecha del header (rama else) ---------- */
+.menu-header .header-right {
+  margin-left: auto;
+  gap: 1rem;
+}
+
+.menu-header .profile-icon {
+  width: 26px;
+  height: 26px;
+  color: var(--menu-vino);
+}
+
+.menu-login-btn {
+  padding: 6px 16px;
+  border: 1px solid var(--menu-vino);
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--menu-vino);
+  background: var(--menu-blanco);
+  white-space: nowrap;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.menu-login-btn:hover {
+  background: var(--menu-vino);
+  color: var(--menu-blanco);
+  transform: scale(1.05);
+}
+
+/* "@nombre" cuando hay sesión iniciada */
+.menu-usuario {
+  padding: 6px 14px;
+  border: 1px solid var(--menu-vino);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: var(--menu-vino);
+  background: var(--menu-blanco);
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .menu-header .header-right {
+    margin-left: 0;
+  }
+}
+
+/* ---------- Grid de tarjetas ---------- */
+.cards-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.portal-card {
+  background-color: #fff;
+  border-radius: 18px;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.08);
+  padding: 26px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.portal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.14);
+}
+
+.portal-card:focus-visible {
+  outline: 3px solid rgb(73, 41, 34);
+  outline-offset: 3px;
+}
+
+.card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 193, 77, 0.25);
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.card-name {
+  font-size: 1.05rem;
+}

@@ -1,0 +1,134 @@
+:root{
+  --menu-vino: rgb(73, 41, 34);
+  --menu-rojo: #A52727;
+  --menu-rosado: rgb(255, 213, 206);
+  --menu-blanco: #ffffff;
+  --menu-texto: #1c1c20;
+}
+
+/* Estilos propios del menú de vigilante. Usa la misma tipografía y componentes de SIGCO. */
+.vigilante-page {
+    min-height: 100vh;
+    margin-top: 0;
+    padding: 0;
+    background-color: var(--idx-rosa);
+    color: #1c1c20;
+    font-family: "Nunito", sans-serif;
+}
+
+.vigilante-page .header-menu {
+    background-color: rgb(255, 213, 206);
+    border-bottom: 1px solid rgba(73, 41, 34, 0.12);
+}
+
+.vigilante-page .menu-navbar {
+    min-height: 72px;
+    height: auto;
+    flex-wrap: nowrap;
+}
+
+.vigilante-page .header-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-left: auto;
+}
+
+.vigilante-page .menu-tab {
+    color: rgb(73, 41, 34);
+}
+
+.vigilante-section {
+    max-width: 1450px;
+    padding: 40px 24px 60px;
+}
+
+.vigilante-section .usr-titulo {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.vigilante-section .usr-titulo h1 {
+    margin: 0 0 8px;
+    color: rgb(73, 41, 34);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+}
+
+.vigilante-section .usr-titulo p {
+    margin: 0;
+    color: rgb(73, 41, 34);
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+}
+
+.vigilante-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.vigilante-card {
+    min-height: 235px;
+    justify-content: flex-start;
+    padding: 28px 20px;
+    border-top: 4px solid rgb(250, 154, 81);
+    border-radius: 18px;
+    background: #fff;
+    text-align: center;
+}
+
+.vigilante-card .card-name {
+    color: rgb(73, 41, 34);
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.vigilante-card p {
+    margin: 8px 0 0;
+    color: #1c1c20;
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.vigilante-card:hover {
+    background: #fff3f0;
+}
+
+.vigilante-card.tarjeta-deshabilitada {
+    opacity: 0.62;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+@media (max-width: 900px) {
+    .vigilante-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .vigilante-page .menu-navbar {
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 16px;
+    }
+
+    .vigilante-page .header-right {
+        gap: 10px;
+    }
+
+    .vigilante-page .menu-usuario {
+        padding: 5px 8px;
+        font-size: 0.82rem;
+    }
+
+    .vigilante-section {
+        padding: 28px 16px 40px;
+    }
+
+    .vigilante-grid {
+        grid-template-columns: 1fr;
+    }
+}

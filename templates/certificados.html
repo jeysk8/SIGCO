@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}Certificados{% endblock %}</title>
+    <link rel="icon" href="../static/icono_1.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_menu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_servic.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_certificados.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="seccion-blanca servicios-page">
+
+    {% set tipo_navbar = 'usuario' %}
+    {% include 'components/navbar.html' %}
+
+{% with mensajes = get_flashed_messages() %}
+  {% if mensajes %}
+  <div class="aviso" role="alert">
+    <button type="button" class="aviso-cerrar" aria-label="Cerrar" onclick="this.parentElement.remove()">×</button>
+    <p>{{ mensajes[0] }}</p>
+  </div>
+  {% endif %}
+{% endwith %}
+
+{% block contenido %}
+<main class="layout-servicios">
+    <form method="POST" action="{{ url_for('certificado.buscar_certificados') }}" class="contenedor-formulario">
+
+        <div class="caja-inputs">
+
+            <select name="tipo_certificado" id="tipo_certificado" required>
+                <option value="" disabled {% if not tipo_certificado %}selected{% endif %}>tipo de certificado</option>
+                <option value="pagos" {% if tipo_certificado == 'pagos' %}selected{% endif %}>pagos</option>
+            </select>
+
+            <div class="campo">
+                <span class="campo-etiqueta">Fecha del certificado:</span>
+                <input type="date" name="fecha" id="fecha" value="{{ fecha or '' }}" required>
+            </div>
+
+            <div class="campo">
+                <span class="campo-etiqueta">Numero de identificacion:</span>
+                <input type="text" name="numero_identificacion" id="numero_identificacion" value="{{ numero_identificacion or '' }}" inputmode="numeric" pattern="[0-9]{1,10}" maxlength="10" title="Solo números, máximo 10 dígitos" required>
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn-registrar">Buscar</button>
+    </form>
+</main>
+{% endblock %}
+
+<script>
+    const settingsBtn = document.getElementById('settings-btn');
+    const settingsDropdown = document.getElementById('settings-dropdown');
+
+    settingsBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = settingsDropdown.classList.toggle('open');
+        settingsBtn.setAttribute('aria-expanded', isOpen);
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!settingsDropdown.contains(e.target) && e.target !== settingsBtn) {
+            settingsDropdown.classList.remove('open');
+            settingsBtn.setAttribute('aria-expanded', false);
+        }
+    });
+
+    const vistaBtn = document.getElementById('vista-btn');
+    const vistaDropdown = document.getElementById('vista-dropdown');
+
+    if (vistaBtn) {
+        vistaBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            settingsDropdown.classList.remove('open');
+            settingsBtn.setAttribute('aria-expanded', false);
+            const isOpen = vistaDropdown.classList.toggle('open');
+            vistaBtn.setAttribute('aria-expanded', isOpen);
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!vistaDropdown.contains(e.target) && e.target !== vistaBtn) {
+                vistaDropdown.classList.remove('open');
+                vistaBtn.setAttribute('aria-expanded', false);
+            }
+        });
+
+        settingsBtn.addEventListener('click', () => {
+            vistaDropdown.classList.remove('open');
+            vistaBtn.setAttribute('aria-expanded', false);
+        });
+    }
+</script>
+
+<footer class="pie">
+    <p>© 2026 SIGCO</p>
+    <ul class="pie-links">
+        <li><a href="{{ url_for('pages.acerca') }}">Acerca de nosotros</a></li>
+        <li><a href="{{ url_for('pages.contact') }}">Contactos</a></li>
+    </ul>
+</footer>
+
+</body>
+</html>

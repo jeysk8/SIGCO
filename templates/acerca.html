@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca de Nosotros</title>
+    <link rel="icon" href="../static/icono_1.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_menu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_acerca.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="seccion-blanca">
+
+{% set tipo_navbar = 'inicio' %}
+{% include 'components/navbar.html' %}
+
+    <!-- TARJETA CONTENEDORA DE ACERCA DE NOSOTROS -->
+    <main class="acerca-container">
+        <section class="acerca-card">
+            
+            <div class="acerca-texto">
+                <span class="acerca-eyebrow">Conoce nuestra comunidad</span>
+                <h1>Sobre Nuestro Conjunto Residencial</h1>
+
+                <div class="acerca-descripcion">
+                    <h2>Nuestra Historia y Creación</h2>
+                    <p>
+                        El <strong>Conjunto Residencial Puerto Gaita</strong> nació como un proyecto pensado para brindar bienestar, comodidad y un entorno seguro a las familias de Soledad, Atlántico. Oficialmente consolidado con la aprobación de su reglamento de propiedad horizontal en la Asamblea General de Propietarios el 5 de mayo de 2018, nuestro conjunto se ha establecido como un referente de convivencia armónica, integración familiar y gestión comunitaria.
+                    </p>
+                    <p>
+                        Ubicado en la Calle 41 #17c-185, Puerto Gaita cuenta con zonas comunes diseñadas para el disfrute de todas las edades, incluyendo piscina, salón comunal, gimnasio, zonas infantiles y áreas de integración, todas respaldadas por un esfuerzo constante por mantener la seguridad, el orden y la calidad de vida de sus residentes.
+                    </p>
+
+                    <h2>Misión</h2>
+                    <p>
+                        Promover el bienestar, la seguridad y la convivencia armónica de todos los residentes del Conjunto Residencial Puerto Gaita, garantizando la administración eficiente de los bienes comunes, el cumplimiento normativo y el fortalecimiento de los lazos vecinales dentro de un marco de respeto y responsabilidad compartida.
+                    </p>
+
+                    <h2>Visión</h2>
+                    <p>
+                        Consolidarnos como un conjunto residencial modelo en Soledad, destacado por su excelente convivencia comunitaria, la preservación y modernización de sus instalaciones, y el uso transparente de sus recursos, brindando siempre un entorno tranquilo, seguro y valorizado para cada una de las familias que lo habitan.
+                    </p>
+                </div>
+            </div>
+
+            <div class="acerca-imagen">
+                <img src="{{ url_for('static', filename='puertogaita.jpg') }}" alt="Entrada Puerto Gaita">
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="pie">
+        <p>© 2026 SIGCO</p>
+        <ul class="pie-links">
+            <li><a href="{{ url_for('pages.acerca') }}">Acerca de nosotros</a></li>
+            <li><a href="{{ url_for('pages.contact') }}">Contactos</a></li>
+        </ul>
+    </footer>
+
+<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+
+</body>
+</html>
